@@ -133,10 +133,7 @@ app.get('/about_chening', function(req, res){
 
 //Grocery List Page
 app.get('/grocery_list', function(req, res){
-	var groceryNames = [];
-	var groceryCosts = [];
-	var groceryNotes = [];
-	var groceryIDs = [];
+	var groceryList = [];
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
 
@@ -146,18 +143,9 @@ app.get('/grocery_list', function(req, res){
     // Do something with the returned Parse.Object values
     for (var i = 0; i < results.length; i++) {
       var object = results[i];
-      groceryNames.push(object.get('itemName'));
-      groceryCosts.push(object.get('itemCost'));
-      groceryNotes.push(object.get('itemNotes'));
-      groceryIDs.push(object.id);
-      alert(object.id + ' - ' + object.get('itemName'));
+      alert(object.id + ' - ' + object.get('item_name'));
     }
-    res.render('grocery_list', {
-    	groceryNames: groceryNames,
-    	groceryCosts: groceryCosts,
-    	groceryNotes: groceryNotes,
-    	groceryIDs: groceryIDs,
-    	});
+    res.render('grocery_list', { groceries: results });
   },
 
   error: function(error) {
@@ -230,19 +218,20 @@ app.post('/createHome', function(req, res){
 //Add user to home
 app.post('/addUser', function(req, res){
 
-  var User = Parse.Object.extend("User");
-  var query = new Parse.Query(User); // Create a new query
+  var query = new Parse.Query(Parse.User); // Create a new query
   console.log(req.body.username, ' is the username...');
   query.equalTo("username", req.body.username); //Add Constraints
   //Find Matches
+  var reqst = req;
   query.find({
-    success: function(userToAdd, req) {
+    success: function(userToAdd, reqst) {
       alert("Successfully retrieved " + userToAdd.length + " instance(s) of userToAdd.");
       var Home = Parse.Object.extend("Home");
       var query2 = new Parse.Query(Home);
 
-      console.log('This is the Id of the home to update:', JSON.stringify(req.body));
-      query2.equalTo( "objectId", req.body.homeID );
+
+      console.log('This is the Id of the home to update:', reqst.body);
+      query2.equalTo( "objectId", reqst.body.homeID );
       query2.find({
         success: function(home) {
           console.log('SAVING', userToAdd.get('objectId') , 'TO HOME--USERS' );
