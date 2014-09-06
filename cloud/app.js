@@ -285,7 +285,7 @@ app.post('/delete_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
 	
-	grocery_query(req.body.ident.id, {
+	grocery_query.get(req.body.ident, {
 		success: grocery_query.destroy({
 			success: function(grocery_query){
 				res.redirect('/grocery_list');
