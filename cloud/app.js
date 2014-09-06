@@ -268,6 +268,44 @@ app.post('/make_item', function(req, res){
 	});
 });
 
+//app.post('/delete_item', function(req, res){
+
+//	var Grocery = Parse.Object.extend("Grocery");
+//	var grocery_query = new Parse.Query(Grocery);
+	
+//	grocery_query(ident, {
+//		success: grocery_query.destroy({
+//			success: function(grocery_query){
+//				res.redirect('/grocery_list');
+//			},
+//			error: function(grocery_query, error){
+//			}
+//		}),
+//		error: function(grocery_query, error) {
+//		alert('Nope, didnt work');
+//		}
+//	});
+//});
+
+
+//function myFunction(ident){
+//	var Grocery = Parse.Object.extend("Grocery");
+//	var grocery_query = new Parse.Query(Grocery);
+	
+//	grocery_query(ident, {
+//		success: grocery_query.destroy({
+//			success: function(grocery_query){
+//			},
+//			error: function(grocery_query, error){
+//			}
+//			}),
+//		error: function(grocery, error) {
+//		alert('Nope, didnt work');
+//		}
+//});
+//}
+
+
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
 //   // GET http://example.parseapp.com/test?message=hello
