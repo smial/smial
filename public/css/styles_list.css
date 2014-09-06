@@ -1,8 +1,12 @@
 body {
 	padding: 80px;
 	background-color: 	#E6E6E6;
+
 }
 
+list-group-item {
+	background-color: black;
+}
 
 navbar {
 	color: black;

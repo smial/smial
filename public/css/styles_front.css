@@ -1,5 +1,6 @@
 body {
 	padding: 0px;
+	background-color: 	#E6E6E6;
 }
 
 #member1{
@@ -20,4 +21,13 @@ body {
 
 #img1 {
 	padding: 0px;
+}
+
+#front_text {
+	font-size: 200%;
+}
+
+#mytitle {
+	margin-top: 3cm;
+	margin-bottom: 1cm;
 }

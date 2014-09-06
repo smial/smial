@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!-- 	Draft 1 of Mhacks IV project
+		Adam Karabatakis
+		Lauren Bilbo
+		Chening Duker
+-->
+
+<head>
+		<title> Smial </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href = "../../public/css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../../public/css/styles_list.css" rel = "stylesheet">
+		<script src = "../../public/js/jquery.js"></script>
+        <script src = "../../public/js/bootstrap.js"></script>
+</head>
+	
+	<!-- ============ START OF BODY ========== -->
+	
+	<body>
+		<div class = "navbar navbar-inverse navbar-fixed-top">
+			<div class = "container">
+				<a href = "#" class = "navbar-brand"> Smial</a>
+				
+				<button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="site draft 1.html">My House</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+
+		<div class="container">
+			<div class="panel panel-default panel-body">
+				<h1> 1028 Packard </h1>
+				<table class="table table-bordered">
+					<tr>
+						<td id="member1">
+							<strong>Adam</strong> Karabatakis            
+						</td>				
+						<td id="member2">
+							<strong>Lauren</strong> Bilbo            
+						</td>				
+						<td id="member3">
+							<strong>Chening</strong> Duker            
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>	
+
+		<div class="row">
+		<h1> Grocery List </h1>
+		</div>
+
+		<div class="row">
+		<a class="btn btn-primary btn-lg" href="#add" data-toggle="modal"> Add an Item</a>
+		</div>
+		<div class="row">
+		<p> </p>
+		</div>
+		
+		<div class="list-group col-md-5">
+			<a href="#" class="list-group-item">
+				<h4>Parsnips</h4>
+				<p> $4.99 </p>
+				<p> Organic Parsnips only please! </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4>Carrots</h4>
+				<p> $2.39 </p>
+				<p> No notes </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4>Toilet Paper</h4>
+				<p> $4.99 </p>
+				<p> Double plied only, I'm sensitive </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4>Parsnips</h4>
+				<p> $8.00 </p>
+				<p> 8-10 range is fine </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+
+		</div>
+		
+		<div class="col-md-2"></div>
+		<div class="list-group col-md-5">
+			<a href="#" class="list-group-item">
+				<h4>Sausages</h4>
+				<p> $7.00 </p>
+				<p> No notes </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4> Paper Towel</h4>
+				<p> $6.99 </p>
+				<p> Buy it in bulk </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4>Parsnips</h4>
+				<p> $4.95 </p>
+				<p> I love parsnips </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4>Carrots</h4>
+				<p> Price </p>
+				<p> Notes </p>
+				<button class="btn btn-success"> Claim </button>	
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+
+		</div>
+		
+		
+		<div class="modal" id="add" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form class="form-horizontal">
+						<div class="modal-header">
+							<h4>Request an Item</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for = "item-name" class="col-lg-2 control-label">Item</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
+								<div class="col-lg-10">
+
+									<textarea class="form-control" rows="8" placeholder="That's a lot of parsnips"></textarea>
+								
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "item-members" class="col-lg-2 control-label">Who's In</label>
+								<div class="col-lg-10">
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adam Karabatakis
+									</label>
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="inlineCheckbox2" value="option2" checked> Lauren Bilbo
+									</label>
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="inlineCheckbox3" value="option3" checked> Chening Duker
+									</label>
+								</div>
+							</div>
+							
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Submit</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal" id="edit" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form class="form-horizontal">
+						<div class="modal-header">
+							<h4>Request an Item</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for = "item-name" class="col-lg-2 control-label">Item</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
+								<div class="col-lg-10">
+
+									<textarea class="form-control" rows="8" placeholder="That's a lot of parsnips"></textarea>
+								
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "item-members" class="col-lg-2 control-label">Who's In</label>
+								<div class="col-lg-10">
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adam Karabatakis
+									</label>
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="inlineCheckbox2" value="option2" checked> Lauren Bilbo
+									</label>
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="inlineCheckbox3" value="option3" checked> Chening Duker
+									</label>
+								</div>
+							</div>
+							
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Submit</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
