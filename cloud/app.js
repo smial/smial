@@ -59,6 +59,27 @@ app.get('/home-dash', function(req, res) {
   });
 });
 
+//Home Nav Page
+app.get('/house_nav', function(req, res){
+	var groceryList = [];
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery = new Parse.Query(Grocery);
+
+	query.find({
+	  success: function(results) {
+    alert("Successfully retrieved " + results.length + " scores.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+      var object = results[i];
+      alert(object.id + ' - ' + object.get('item_name'));
+    }
+    res.render('house_nav', {groceries: results});
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+});
 
 // LogIn
 app.post('/login', function(req, res) {
@@ -117,7 +138,6 @@ app.post('/createHome', function(req, res){
     }
   });
 });
-
 //Add user to home
 app.post('/addUser', function(req, res){
 
@@ -126,37 +146,35 @@ app.post('/addUser', function(req, res){
   query.equalTo("username", req.body.username); //Add Constraints
   //Find Matches
   query.find({
-  success: function(userToAdd) {
-    alert("Successfully retrieved " + results.length + " scores.");
-    var Home = Parse.Object.extend("Home");
-    var query2 = new Parse.Query(Home);
-    query.equalTo("id", req.body.homeID);
+    success: function(userToAdd) {
+      alert("Successfully retrieved " + results.length + " scores.");
+      var Home = Parse.Object.extend("Home");
+      var query2 = new Parse.Query(Home);
+      query.equalTo("id", req.body.homeID);
 
-    query.find({
-      success: function(home) {
-        alert('found home:');
-        home.add("users", userToAdd);
-        home.save();
-      },
-      error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
-  }
+      query.find({
+        success: function(home) {
+          alert('found home:');
+          home.add("users", userToAdd);
+          home.save();
+        },
+        error: function(error) {
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
 });
-
-
-
-});
-
-// Define Grocery item:
-var Grocery = Parse.Object.extend("Grocery");
 
 // Make item name:
 app.post('/make_item', function(req, res){
+
+	// Define Grocery item:
+	var Grocery = Parse.Object.extend("Grocery");
+
 	var grocery = new Grocery();
 	grocery.set("item_name", item-name);
 	grocery.set("item_cost", item-cost);
