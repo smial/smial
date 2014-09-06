@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "smial"
+        }, 
+        "smial": {
+            "applicationId": "S8FEdekvaTfe7fxZYy19ru3NvmtugskgnS4kJkAd", 
+            "masterKey": "dIrxydiQCHSIt30QJnwUxtpNUM65Sg4aIBJuDtgM"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.19"
+    }
+}
