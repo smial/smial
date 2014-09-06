@@ -87,7 +87,7 @@ app.get('/grocery_list', function(req, res){
     alert("Error: " + error.code + " " + error.message);
   }
 
-res.render('grocery_list', {groceries: results});
+res.render('grocery_list');
 
 
 });
