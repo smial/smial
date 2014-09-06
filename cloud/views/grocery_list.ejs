@@ -68,7 +68,7 @@
 		</div>
 
 		<div class="list-group col-md-5">
-		<% for(var i=0; i<groceries.length/2; i++) { %>
+		<% for(var i=0; i<groceryNames.length/2; i++) { %>
 			<a href="#" class="list-group-item">
 				<h4><%= groceryNames[i] %></h4>
 				<p><%= groceryCosts[i] %></p>
@@ -78,77 +78,22 @@
 				<button class="btn btn-danger pull-right"> Cancel </button>
 			</a>
 			 <% } %>
-			<a href="#" class="list-group-item">
-				<h4>Carrots</h4>
-				<p> $2.39 </p>
-				<p> No notes </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Toilet Paper</h4>
-				<p> $4.99 </p>
-				<p> Double plied only, I'm sensitive </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Parsnips</h4>
-				<p> $8.00 </p>
-				<p> 8-10 range is fine </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
+
 
 		</div>
 
 		<div class="col-md-2"></div>
 		<div class="list-group col-md-5">
-		<% for(var i=groceries.length/2+1; i<groceries.length; i++) { %>
+		<% for(var i=groceryNames.length/2+1; i<groceryNames.length; i++) { %>
 			<a href="#" class="list-group-item">
-				<h4>groceries[i].get('itemName')</h4>
-				<p>groceries[i].get("itemCost")</p>
-				<p><%= groceries[i].itemNotes %></p>
+				<h4><%= groceryNames[i] %></h4>
+				<p><%= groceryCosts[i] %></p>
+				<p><%= groceryNotes[i] %></p>
 				<button class="btn btn-success"> Claim </button>
 				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
 				<button class="btn btn-danger pull-right"> Cancel </button>
 			</a>
 			 <% } %>
-			<a href="#" class="list-group-item">
-				<h4>Sausages</h4>
-				<p> $7.00 </p>
-				<p> No notes </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4> Paper Towel</h4>
-				<p> $6.99 </p>
-				<p> Buy it in bulk </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Parsnips</h4>
-				<p> $4.95 </p>
-				<p> I love parsnips </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Carrots</h4>
-				<p> Price </p>
-				<p> Notes </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
 
 		</div>
 
