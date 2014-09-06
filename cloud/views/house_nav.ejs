@@ -42,7 +42,7 @@
 
 		<div class="container">
 			<div class="panel panel-default panel-body">
-				<h1> 1028 Packard </h1>
+				<h1> 1028 Packard</h1>
 				<table class="table table-bordered">
 					<tr>
 						<td id="member1">
@@ -67,7 +67,7 @@
 
 				  <div class='example-chat-toolbar'>
 					<label for="nameInput">Username:</label>
-					<input type='text' id='nameInput' placeholder='enter a username...'>
+					<input type='text' id='nameInput' placeholder= $('Parce.User.current().get("username")')>
 				  </div>
 
 				  <ul id='example-messages' class="example-chat-messages"></ul>
@@ -101,7 +101,7 @@
 				  });
 
 				  // Add a callback that is triggered for each chat message.
-				  messagesRef.limit(10).on('child_added', function (snapshot) {
+				  messagesRef.limit(50).on('child_added', function (snapshot) {
 					//GET DATA
 					var data = snapshot.val();
 					var username = data.name || "anonymous";
