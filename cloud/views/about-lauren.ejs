@@ -3,10 +3,10 @@
 	<head>
 		<title> Smial </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href = "../../public/css/bootstrap.min.css" rel = "stylesheet">
-        <link href = "../../public/css/styles_list.css" rel = "stylesheet">
-		<script src = "../../public/js/jquery.js"></script>
-        <script src = "../../public/js/bootstrap.js"></script>
+		<link href = "../css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../css/styles_list.css" rel = "stylesheet">
+		<script src = "../js/jquery.js"></script>
+        <script src = "../js/bootstrap.js"></script>
 	</head>
 	
 	<!-- ============ START OF BODY ========== -->
@@ -25,9 +25,9 @@
 				
 				<div class = "collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="house_nav.ejs">My House</a></li>
-						<li><a href="profile.ejs">Profile</a></li>
-						<li><a href="about.ejs">About</a></li>
+						<li><a href="house_nav">My House</a></li>
+						<li><a href="profile">Profile</a></li>
+						<li><a href="about">About</a></li>
 					</ul>
 				</div>
 			</div>
@@ -38,10 +38,10 @@
 				<div class = "row">
 					<div class = "col-md-2">
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href = "about.ejs">Team</a></li>
-							<li class = "active"><a href = "about-lauren.ejs">Lauren</a></li>
-							<li><a href = "about-chenning.ejs">Chenning</a></li>
-							<li><a href = "about-adam.ejs">Adam</a></li>
+							<li><a href = "about">Team</a></li>
+							<li class = "active"><a href = "about-lauren">Lauren</a></li>
+							<li><a href = "about-chenning">Chenning</a></li>
+							<li><a href = "about-adam">Adam</a></li>
 						</ul>
 					</div>
 
@@ -52,7 +52,7 @@
 
 			<div class="row featurette">
 				<div class="col-md-5">
-					<img class="featurette-image img-responsive" src="../../public/img/Lauren.jpg" width="55%">
+					<img class="featurette-image img-responsive" src="../img/Lauren.jpg" width="55%">
 				</div>
 				<div class="col-md-7">
 					<h2 class="featurette-heading"> Lauren <span class="text-muted"> Bilbo </span></h2>
@@ -84,43 +84,5 @@
 				
 		</div>
 		
-		<div class="modal fade" id="contact" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form class="form-horizontal">
-						<div class="modal-header">
-							<h4>Contact us</h4>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label for = "contact-name" class="col-lg-2 control-label">Name</label>
-								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="contact-name" placeholder="full name"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for = "contact-email" class="col-lg-2 control-label">Email</label>
-								<div class="col-lg-10">
-									<input type = "email" class="form-control" id="contact-email" placeholder="email address"></input>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for = "contact-message" class="col-lg-2 control-label">Message</label>
-								<div class="col-lg-10">
-
-									<textarea class="form-control" rows="8"></textarea>
-								
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" type="submit">Submit</button>
-							<a class="btn btn-default" data-dismiss="modal">Close</a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 	</body>
 </html>
