@@ -109,7 +109,7 @@
 		<div class="list-group col-md-5">
 		<% for(var i=groceries.length/2+1; i<groceries.length; i++) { %>
 			<a href="#" class="list-group-item">
-				<h4><%=groceries[i].itemName%></h4>
+				<h4><%=groceries[i].get('itemName')%></h4>
 				<p><%= groceries[i].itemCost %></p>
 				<p><%= groceries[i].itemNotes %></p>
 				<button class="btn btn-success"> Claim </button>
