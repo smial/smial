@@ -143,6 +143,9 @@ app.get('/grocery_list', function(req, res){
 	var groceryNames = [];
 	var groceryCosts = [];
 	var groceryNotes = [];
+//	var option1 = [];
+//	var option2 = [];
+//	var option3 = [];
 	var groceryIDs = [];
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
@@ -156,6 +159,9 @@ app.get('/grocery_list', function(req, res){
 		groceryNames.push(object.get('itemName'));
 		groceryCosts.push(object.get('itemCost'));
 		groceryNotes.push(object.get('itemNotes'));
+	//	option1.push(object.get('option1'));
+	//	option2.push(object.get('option2'));
+	//	option3.push(object.get('option3'));
 		groceryIDs.push(object.id);
 		
     	alert(object.id + ' - ' + object.get('item_name'));
@@ -266,6 +272,9 @@ app.post('/make_item', function(req, res){
 	grocery.set("itemName", req.body.itemName);
 	grocery.set("itemCost", req.body.itemCost);
 	grocery.set("itemNotes", req.body.itemNotes);
+//	grocery.set("option1", option1);
+//	grocery.set("option2", option2);
+//	grocery.set("option3", option3);
 
 
 	grocery.save(null, {
@@ -287,8 +296,8 @@ app.post('/delete_item', function(req, res){
 	
 	grocery_query.get(req.body.ident, {
 		success: function(this_grocery){
-	//		this_grocery.destroy({
-	//			success: function(grocery_query){
+			this_grocery.destroy({
+				success: function(grocery_query){
 					res.redirect('/grocery_list');
 				},
 				error: function(grocery_query, error){
