@@ -188,7 +188,7 @@ app.post('/make_item', function(req, res){
 	  error: function(grocery, error) {
 	  alert('Failed to create new object, with error code: Chening!');
 	  }
-	  res.render('grocery_list');
+	  res.redirect('grocery_list');
 	//name, price, notes, who's in?
 	});
 });
