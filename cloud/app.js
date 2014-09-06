@@ -286,13 +286,15 @@ app.post('/delete_item', function(req, res){
 	var grocery_query = new Parse.Query(Grocery);
 	
 	grocery_query.get(req.body.ident, {
-		success: grocery_query.destroy({
-			success: function(grocery_query){
-				res.redirect('/grocery_list');
-			},
-			error: function(grocery_query, error){
-			}
-		}),
+		success: function(this_grocery){
+	//		this_grocery.destroy({
+	//			success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+		},	
 		error: function(grocery_query, error) {
 		alert('Nope, didnt work');
 		}
