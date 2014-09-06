@@ -202,7 +202,7 @@ app.post('/createHome', function(req, res){
   //Create an instance of a home & name it
   var home = new Home();
     home.set("name", req.body.nameHome );
-    home.set("users", [] );
+    home.set("users", [ Parse.User.current().id ] );
 
     home.save(null, {
     success: function(home) {
@@ -215,26 +215,24 @@ app.post('/createHome', function(req, res){
     }
   });
 });
+var Home = Parse.Object.extend("Home");
+
 //Add user to home
 app.post('/addUser', function(req, res){
-  var userToAdd;
-  var query = new Parse.Query(Parse.User); // Create a new query
-  query.equalTo( 'objectId', req.body.username);
-  query.first().then(function(user){
-    userToAdd = user
 
-    var Home = Parse.Object.extend("Home");
+  Parse.Cloud.useMasterKey();
+  var query = new Parse.Query(Parse.User); // Create a new query
+  query.equalTo( 'username', req.body.username);
+  query.first().then(function(user){
+
     var queryHome = new Parse.Query(Home);
     queryHome.equalTo( 'objectId', req.body.homeID);
-    queryHome.include("users");
     queryHome.first().then(function(home){
-      home.add("users", userToAdd);
-      home.save();
+      home.add("users", user.id);
+      return home.save();
     }).then(function(){ res.redirect('home-dash'); });
 
   });
-
-
 
 
 });
