@@ -67,6 +67,21 @@ app.get('/house_nav', function(req, res){
 
 });
 
+//
+app.get('/about_adam', function(req, res){
+
+    res.render('about_adam');
+
+
+});
+
+app.get('/about_chening', function(req, res){
+
+    res.render('about_chening');
+
+
+});
+
 //Grocery List Page
 app.get('/grocery_list', function(req, res){
 	var groceryList = [];
@@ -196,10 +211,11 @@ app.post('/make_item', function(req, res){
 	grocery.set("item_cost", req.body.item-cost);
 	grocery.set("item_notes", req.body.item-notes);
 
+
 	grocery.save(null, {
 		success: function(grocery) {
   		alert('New grocery created with objectId: ' + grocery.id);
-      res.redirect('grocery_list');
+      res.redirect('/grocery_list');
 	  },
 	  error: function(grocery, error) {
   	  alert('Failed to create new object, with error code: Chening!');
