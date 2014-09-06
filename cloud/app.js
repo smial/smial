@@ -81,19 +81,19 @@ app.get('/grocery_list', function(req, res){
       var object = results[i];
       alert(object.id + ' - ' + object.get('item_name'));
     }
+    res.render('grocery_list', { groceries: results });
   },
 
   error: function(error) {
     alert("Error: " + error.code + " " + error.message);
   }
 
-res.render('grocery_list', {groceries: results});
 
 
 });
 
 
-})
+});
 
 // LogIn
 app.post('/login', function(req, res) {
@@ -169,8 +169,8 @@ app.post('/addUser', function(req, res){
       console.log('This is the Id of the home to update:', req.body.homeID )
       query2.get( req.body.homeID , {
         success: function(home) {
-          alert('found ' + home.length + 'homes: ' + JSON.stringify(home) );
-          home.add("users", userToAdd.id);
+          alert('found ' + home.length + ' homes: ' + JSON.stringify(home) );
+          home.add("users", userToAdd.get('ObjectId') );
           home.save();
           res.redirect('/home-dash');
         },
@@ -192,9 +192,9 @@ app.post('/make_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 
 	var grocery = new Grocery();
-	grocery.set("item_name", req.body.item-name);
-	grocery.set("item_cost", req.body.item-cost);
-	grocery.set("item_notes", req.body.item-notes);
+	grocery.set("itemName", req.body.itemName);
+	grocery.set("itemCost", req.body.itemCost);
+	grocery.set("itemNotes", req.body.itemNotes);
 
 	grocery.save(null, {
 		success: function(grocery) {
