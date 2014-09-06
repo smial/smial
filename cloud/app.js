@@ -156,10 +156,10 @@ app.get('/grocery_list', function(req, res){
       alert(object.id + ' - ' + object.get('itemName'));
     }
     res.render('grocery_list', {
-    	groceryNames: groceryNames
-    	groceryCosts: groceryCosts
-    	groceryNotes: groceryNotes
-    	groceryIDs: groceryIDs
+    	groceryNames: groceryNames,
+    	groceryCosts: groceryCosts,
+    	groceryNotes: groceryNotes,
+    	groceryIDs: groceryIDs,
     	});
   },
 
