@@ -217,37 +217,26 @@ app.post('/createHome', function(req, res){
 });
 //Add user to home
 app.post('/addUser', function(req, res){
-
+  var userToAdd;
   var query = new Parse.Query(Parse.User); // Create a new query
-  console.log(req.body.username, ' is the username...');
-  query.equalTo("username", req.body.username); //Add Constraints
-  //Find Matches
-  var reqst = req;
-  query.find({
-    success: function(userToAdd, reqst) {
-      alert("Successfully retrieved " + userToAdd.length + " instance(s) of userToAdd.");
-      var Home = Parse.Object.extend("Home");
-      var query2 = new Parse.Query(Home);
+  query.equalTo( 'objectId', req.body.username);
+  query.first().then(function(user){
+    userToAdd = user
 
+    var Home = Parse.Object.extend("Home");
+    var queryHome = new Parse.Query(Home);
+    queryHome.equalTo( 'objectId', req.body.homeID);
+    queryHome.include("users");
+    queryHome.first().then(function(home){
+      home.add("users", userToAdd);
+      home.save();
+    }).then(function(){ res.redirect('home-dash'); });
 
-      console.log('This is the Id of the home to update:', reqst.body);
-      query2.equalTo( "objectId", reqst.body.homeID );
-      query2.find({
-        success: function(home) {
-          console.log('SAVING', userToAdd.get('objectId') , 'TO HOME--USERS' );
-          home.add("users", userToAdd.get('objectId') );
-          home.save();
-          res.redirect('/home-dash');
-        },
-        error: function(error) {
-          alert("Error: " + error.code + " " + error.message);
-        }
-      });
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
   });
+
+
+
+
 });
 
 // Make item name:
