@@ -114,7 +114,7 @@ app.post('/createHome', function(req, res){
 });
 
 // Define Grocery item:
-var Grocery = Parse.object.extend("Grocery");
+var Grocery = Parse.Object.extend("Grocery");
 
 // Make item name:
 app.post('/make_item', function(req, res){
