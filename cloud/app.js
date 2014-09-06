@@ -35,34 +35,41 @@ app.get('/home-dash', function(req, res) {
   var homeID = [];
   var homeUsers = [];
   var user = Parse.User.current();
-  var username = user.get('username');
+  var username;
   var Home = Parse.Object.extend("Home");
   //Create a query
   var query = new Parse.Query(Home);
 
   //Put conditions on it
+  user.fetch().then(function(user) {
+    username = user.get('username');
 
-  //retrieve an Array of matching Parse.Objects using find
-  query.find({
-    success: function(results) {
-      alert("Successfully retrieved " + results );
-      // Do something with the returned Parse.Object values
-      for (var i = 0; i < results.length; i++) {
-        var object = results[i];
-        homeNames.push( object.get('name') );
-        homeID.push( object.id );
-        homeUsers.push( object.get('users') );
+  }).then(function() {
+
+
+    //retrieve an Array of matching Parse.Objects using find
+    query.find({
+      success: function(results) {
+        alert("Successfully retrieved " + results );
+        // Do something with the returned Parse.Object values
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          homeNames.push( object.get('name') );
+          homeID.push( object.id );
+          homeUsers.push( object.get('users') );
+        }
+        res.render('home-dash', {
+          homeNames: homeNames,
+          homeID: homeID,
+          homeUsers: homeUsers,
+          username: username
+          });
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
       }
-      res.render('home-dash', {
-        homeNames: homeNames,
-        homeID: homeID,
-        homeUsers: homeUsers,
-        username: username
-        });
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
+    });
+
   });
 });
 
@@ -89,8 +96,7 @@ app.get('/about-Adam', function(req,res) {
 //Adam did this, hes pretty drunk, might want to double check
 app.get('/profile', function(req, res) {
 	var homeNames = [];
-	var User = Parse.Object.extend("User");
-	var user_query = new Parse.Query(User);
+	var user_query = new Parse.Query(Parse.User);
 
 	user_query.find({
 		success: function(results) {
