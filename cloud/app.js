@@ -104,25 +104,39 @@ app.get('/profile', function(req, res) {
 
 //Home Nav Page
 app.get('/house_nav', function(req, res){
+
+    res.render('house_nav');
+
+
+});
+
+//Grocery List Page
+app.get('/grocery_list', function(req, res){
 	var groceryList = [];
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
 
 	grocery_query.find({
 	  success: function(results) {
-    alert("Successfully retrieved " + results.length + " scores.");
+    alert("Successfully retrieved " + results.length + " groceries.");
     // Do something with the returned Parse.Object values
     for (var i = 0; i < results.length; i++) {
       var object = results[i];
       alert(object.id + ' - ' + object.get('item_name'));
     }
-    res.render('house_nav', {groceries: results});
   },
+
   error: function(error) {
     alert("Error: " + error.code + " " + error.message);
   }
+
+res.render('grocery_list', {groceries: results});
+
+
 });
-});
+
+
+})
 
 // LogIn
 app.post('/login', function(req, res) {
@@ -186,19 +200,20 @@ app.post('/addUser', function(req, res){
 
   var User = Parse.Object.extend("User");
   var query = new Parse.Query(User); // Create a new query
+  console.log(req.body.username, ' is the username...');
   query.equalTo("username", req.body.username); //Add Constraints
   //Find Matches
   query.find({
     success: function(userToAdd) {
-      alert("Successfully retrieved " + userToAdd.length + " scores.");
+      alert("Successfully retrieved " + userToAdd.length + " instance(s) of userToAdd.");
       var Home = Parse.Object.extend("Home");
       var query2 = new Parse.Query(Home);
-      query.equalTo("id", req.body.homeID);
 
-      query.find({
+      console.log('This is the Id of the home to update:', req.body.homeID )
+      query2.get( req.body.homeID , {
         success: function(home) {
-          alert('found home:');
-          home.add("users", userToAdd);
+          alert('found ' + home.length + 'homes: ' + JSON.stringify(home) );
+          home.add("users", userToAdd.id);
           home.save();
           res.redirect('/home-dash');
         },
@@ -220,16 +235,17 @@ app.post('/make_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 
 	var grocery = new Grocery();
-	grocery.set("item_name", item-name);
-	grocery.set("item_cost", item-cost);
-	grocery.set("item_message", item-message);
+	grocery.set("item_name", req.body.item-name);
+	grocery.set("item_cost", req.body.item-cost);
+	grocery.set("item_notes", req.body.item-notes);
 
 	grocery.save(null, {
 		success: function(grocery) {
-		alert('New object created with objectId: ' + grocery.id);
+  		alert('New grocery created with objectId: ' + grocery.id);
+      res.redirect('grocery_list');
 	  },
 	  error: function(grocery, error) {
-	  alert('Failed to create new object, with error code: Chening!');
+  	  alert('Failed to create new object, with error code: Chening!');
 	  }
 	//name, price, notes, who's in?
 	});
