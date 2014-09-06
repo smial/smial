@@ -31,7 +31,8 @@ app.get('/', function(req, res) {
 
 //Home Dashboard
 app.get('/home-dash', function(req, res) {
-  var homeList = [];
+  var homeNames = [];
+  var homeIDs = [];
   var Home = Parse.Object.extend("Home");
   //Create a query
   var query = new Parse.Query(Home);
@@ -45,9 +46,10 @@ app.get('/home-dash', function(req, res) {
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) {
         var object = results[i];
-        homeList.push( object.get('name') );
+        homeNames.push( object.get('name') );
+        homeIDs.push( object.id );
       }
-      res.render('home-dash', { homes: homeList });
+      res.render('home-dash', { homeNames: homeNames, homeIDs : homeIDs });
     },
     error: function(error) {
       alert("Error: " + error.code + " " + error.message);
@@ -122,7 +124,7 @@ app.post('/make_item', function(req, res){
 	grocery.set("item_name", item-name);
 	grocery.set("item_cost", item-cost);
 	grocery.set("item_message", item-message);
-	
+
 	grocery.save(null, {
 		success: function(grocery) {
 		alert('New object created with objectId: ' + grocery.id);

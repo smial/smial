@@ -13,16 +13,18 @@
     </form>
 
     <ul>
-    <% for(var i=0; i<homes.length; i++) { %>
+    <% for(var i=0; i<homeNames.length; i++) { %>
         <li>
-            <a href='home/<%= homes[i] %>'>
-                <%= homes[i] %>
-                <form method="post" action="/addUser">
-                <input name="nameHome" class="span2" type="text" placeholder="user_name">
-                <input name="homeId" value='<%= homes[i].id %>
-                <button type="submit" class="btn">Add User</button>
-                </form>
-            </a>
+            <div>
+              <a href='home/<%= homeNames[i] %>'>
+                <%= homeNames[i] %>
+              </a>
+              <form method="post" action="/addUser">
+              <input name="nameHome" class="span2" type="text" placeholder="user_name">
+              <input name="homeId" value='<%= homeIDs[i] %>' >
+              <button type="submit" class="btn">Add User</button>
+              </form>
+            </div>
         </li>
     <% } %>
     </ul>
