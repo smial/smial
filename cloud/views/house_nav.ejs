@@ -147,28 +147,33 @@
 				<div class="modal-content">
 					<form class="form-horizontal">
 						<div class="modal-header">
+						<form method="post" action="/make_item" class="pull-right">
 							<h4>Request an Item</h4>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
 								<label for = "item-name" class="col-lg-2 control-label">Item</label>
 								<div class="col-lg-10">
+						<!--	<form method="post" action="/item_name" class="pull-right"> -->
 									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
+						<!--	</form> -->
 								</div>
 							</div>
 							<div class="form-group">
 								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
 								<div class="col-lg-10">
+						<!--	<form method="post" action="/item_cost" class="pull-right"> -->
 									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
+						<!--	</form> -->
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
 								<div class="col-lg-10">
-
-									<textarea class="form-control" rows="8" placeholder="That's a lot of parsnips"></textarea>
-								
+						<!--	<form method="post" action="/item_notes" class="pull-right"> -->
+									<input type = "text" class="form_control" id="item-notes" placeholder="That's a lot of parsnips!"></input>
+						<!--	</form> -->
 								</div>
 							</div>
 							
@@ -176,13 +181,13 @@
 								<label for = "item-members" class="col-lg-2 control-label">Who's In</label>
 								<div class="col-lg-10">
 									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adam Karabatakis
+									  <input type="checkbox" id="inlineCheckbox1" value="option1"> Adam Karabatakis
 									</label>
 									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox2" value="option2" checked> Lauren Bilbo
+									  <input type="checkbox" id="inlineCheckbox2" value="option2"> Lauren Bilbo
 									</label>
 									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox3" value="option3" checked> Chening Duker
+									  <input type="checkbox" id="inlineCheckbox3" value="option3"> Chening Duker
 									</label>
 								</div>
 							</div>
