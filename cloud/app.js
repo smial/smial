@@ -59,6 +59,49 @@ app.get('/home-dash', function(req, res) {
   });
 });
 
+//About pages
+//Adam did this, hes pretty drunk, might want to double check
+app.get('/about', function(req, res) {
+    res.render('about');
+
+});
+
+app.get('/about-Lauren', function(req, res) {
+	res.render('about-Lauren');
+});
+
+app.get('/about-Chening', function(req,res) {
+	res.render('about-Chening');
+});
+
+app.get('/about-Adam', function(req,res) {
+	res.render('about-Adam');
+});
+
+
+//Profile Nav Page
+//Adam did this, hes pretty drunk, might want to double check
+app.get('/profile', function(req, res) {
+	var homeNames = [];
+	var User = Parse.Object.extend("User");
+	var user_query = new Parse.Query(User);
+	
+	user_query.find({
+		success: function(results) {
+		alert("Successfully retrieved " + results.length + " homes.");
+		for (var i = 0; i < results.length; i++) {
+			var object = results[i];
+			alert(object.id + ' - ' + object.get('username'));
+		}
+		res.render('profile', {profiles: results});
+	},
+	error: function(error) {
+		alert("Error: " + error.code _ " " _ error.message);
+	}
+});
+});
+			
+
 //Home Nav Page
 app.get('/house_nav', function(req, res){
 
@@ -96,19 +139,23 @@ app.get('/grocery_list', function(req, res){
       var object = results[i];
       alert(object.id + ' - ' + object.get('item_name'));
     }
+    res.render('grocery_list', { groceries: results });
   },
 
   error: function(error) {
     alert("Error: " + error.code + " " + error.message);
   }
 
+<<<<<<< HEAD
 res.render('grocery_list');
+=======
+>>>>>>> FETCH_HEAD
 
 
 });
 
 
-})
+});
 
 // LogIn
 app.post('/login', function(req, res) {
@@ -184,8 +231,8 @@ app.post('/addUser', function(req, res){
       console.log('This is the Id of the home to update:', req.body.homeID )
       query2.get( req.body.homeID , {
         success: function(home) {
-          alert('found ' + home.length + 'homes: ' + JSON.stringify(home) );
-          home.add("users", userToAdd.id);
+          alert('found ' + home.length + ' homes: ' + JSON.stringify(home) );
+          home.add("users", userToAdd.get('ObjectId') );
           home.save();
           res.redirect('/home-dash');
         },
@@ -207,9 +254,9 @@ app.post('/make_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 
 	var grocery = new Grocery();
-	grocery.set("item_name", req.body.item-name);
-	grocery.set("item_cost", req.body.item-cost);
-	grocery.set("item_notes", req.body.item-notes);
+	grocery.set("itemName", req.body.itemName);
+	grocery.set("itemCost", req.body.itemCost);
+	grocery.set("itemNotes", req.body.itemNotes);
 
 
 	grocery.save(null, {
