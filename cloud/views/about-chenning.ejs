@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Smial </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href = "../../public/css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../../public/css/styles_list.css" rel = "stylesheet">
+		<script src = "../../public/js/jquery.js"></script>
+        <script src = "../../public/js/bootstrap.js"></script>
+	</head>
+	
+	<!-- ============ START OF BODY ========== -->
+	
+	<body>
+	<body>
+		<div class = "navbar navbar-inverse navbar-fixed-top">
+			<div class = "container">
+				<a href = "#" class = "navbar-brand"> Smial</a>
+				
+				<button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="house_nav.ejs">My House</a></li>
+						<li><a href="profile.ejs">Profile</a></li>
+						<li><a href="about.ejs">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class = "panel panel-default panel-body">
+				<div class = "row">
+					<div class = "col-md-2">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href = "about.ejs">Team</a></a></li>
+							<li><a href = "about-lauren.ejs">Lauren</a></li>
+							<li class = "active"><a href = "about-chenning.ejs">Chenning</a></li>
+							<li><a href = "about-adam.ejs">Adam</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			
+			<hr class="featurette-divider">
+
+			<div class="row featurette">
+				<div class="col-md-5">
+					<img class="featurette-image img-responsive" src="../../public/img/Chenning.jpg" width="55%">
+				</div>
+				<div class="col-md-7">
+					<h2 class="featurette-heading"> Chenning <span class="text-muted"> Duker </span></h2>
+					<p class="lead"> Computer Science </p>
+					<p class="text-muted"> University of Michigan, Ann Arbor</p>
+				</div>
+
+			</div>
+
+			<hr class="featurette-divider">
+			
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading"> About Me</span></h2>
+					<p>Willy Wonka is a character in Roald Dahl's 1964 children's novel Charlie and the Chocolate Factory, its sequel Charlie and the Great Glass Elevator, and the film adaptations of these books that followed. The book and the film adaptations both vividly depict an odd Wonka, a phoenix-like man arising from his creative and eccentric genius. He bewilders the other characters with his antics, but Charlie enjoys Wonka's behavior. In the 2005 film adaptation, Willy Wonka's behavior is viewed more as a (sympathetic) character flaw. Wonka's reasons for giving away his fabulous factory are never revealed in the books, but in the 1971 film adaptation, Wonka tells Charlie he "can't live forever", so he wanted to find a sweet child he could trust his candy making secrets to.</p>
+				</div>
+				<div class = "col-md-3">
+					<h3 class = "text-muted"> Contact Info</h3>
+					<p> email: cead@umich.edu</p>
+					<p> phone: (517) 505-2105</p>
+				</div>
+
+
+			</div>
+
+			<hr class="featurette-divider">
+				
+		</div>
+		
+		<div class="modal fade" id="contact" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form class="form-horizontal">
+						<div class="modal-header">
+							<h4>Contact us</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for = "contact-name" class="col-lg-2 control-label">Name</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="contact-name" placeholder="full name"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for = "contact-email" class="col-lg-2 control-label">Email</label>
+								<div class="col-lg-10">
+									<input type = "email" class="form-control" id="contact-email" placeholder="email address"></input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "contact-message" class="col-lg-2 control-label">Message</label>
+								<div class="col-lg-10">
+
+									<textarea class="form-control" rows="8"></textarea>
+								
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Submit</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Smial </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href = "../../public/css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../../public/css/styles_list.css" rel = "stylesheet">
+		<script src = "../../public/js/jquery.js"></script>
+        <script src = "../../public/js/bootstrap.js"></script>
+	</head>
+	
+	<!-- ============ START OF BODY ========== -->
+	
+	<body>
+	<body>
+		<div class = "navbar navbar-inverse navbar-fixed-top">
+			<div class = "container">
+				<a href = "#" class = "navbar-brand"> Smial</a>
+				
+				<button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="house_nav.ejs">My House</a></li>
+						<li><a href="profile.ejs">Profile</a></li>
+						<li><a href="about.ejs">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class = "panel panel-default panel-body">
+				<div class = "row">
+					<div class = "col-md-2">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href = "about.ejs">Team</a></li>
+							<li><a href = "about-lauren.ejs">Lauren</a></li>
+							<li><a href = "about-chenning.ejs">Chenning</a></li>
+							<li class = "active"><a href = "about-adam.ejs">Adam</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			
+			<hr class="featurette-divider">
+
+			<div class="row featurette">
+				<div class="col-md-5">
+					<img class="featurette-image img-responsive" src="../../public/img/Adam-2.jpg" width="55%">
+				</div>
+				<div class="col-md-7">
+					<h2 class="featurette-heading"> Adam <span class="text-muted"> Karabatakis </span></h2>
+					<p class="lead"> Mathematics, Economics </p>
+					<p class="text-muted"> University of Michigan, Ann Arbor</p>
+				</div>
+			</div>
+
+			<hr class="featurette-divider">	
+			
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading"> About Me</span></h2>
+					<p>Bane is a supervillain who appears in comic books published by DC Comics. The character's origin was in Batman: Vengeance of Bane #1 (January 1993), and was created by Chuck Dixon, Doug Moench, and Graham Nolan. Bane has been one of Batman's more physically and intellectually powerful foes. He is often credited for being the only villain to have "Broken The Bat". IGN's list of the Top 100 Comic Book Villains of All Time ranked Bane as #34. Bane was portrayed by Robert Swenson in the 1997 film Batman & Robin, and by Tom Hardy as the main antagonist in the 2012 film The Dark Knight Rises.</p>
+				</div>
+
+				<div class = "col-md-3">
+					<h3 class = "text-muted"> Contact Info</h3>
+					<p> email: akarabat@umich.edu</p>
+					<p> phone: (734) 837-8225</p>
+				</div>
+
+
+			</div>
+
+			<hr class="featurette-divider">
+				
+		</div>
+		
+		<div class="modal fade" id="contact" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form class="form-horizontal">
+						<div class="modal-header">
+							<h4>Contact us</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for = "contact-name" class="col-lg-2 control-label">Name</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="contact-name" placeholder="full name"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for = "contact-email" class="col-lg-2 control-label">Email</label>
+								<div class="col-lg-10">
+									<input type = "email" class="form-control" id="contact-email" placeholder="email address"></input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "contact-message" class="col-lg-2 control-label">Message</label>
+								<div class="col-lg-10">
+
+									<textarea class="form-control" rows="8"></textarea>
+								
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Submit</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

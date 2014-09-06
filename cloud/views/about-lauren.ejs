@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Smial </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href = "../../public/css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../../public/css/styles_list.css" rel = "stylesheet">
+		<script src = "../../public/js/jquery.js"></script>
+        <script src = "../../public/js/bootstrap.js"></script>
+	</head>
+	
+	<!-- ============ START OF BODY ========== -->
+	
+	<body>
+	<body>
+		<div class = "navbar navbar-inverse navbar-fixed-top">
+			<div class = "container">
+				<a href = "#" class = "navbar-brand"> Smial</a>
+				
+				<button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="house_nav.ejs">My House</a></li>
+						<li><a href="profile.ejs">Profile</a></li>
+						<li><a href="about.ejs">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class = "panel panel-default panel-body">
+				<div class = "row">
+					<div class = "col-md-2">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href = "about.ejs">Team</a></li>
+							<li class = "active"><a href = "about-lauren.ejs">Lauren</a></li>
+							<li><a href = "about-chenning.ejs">Chenning</a></li>
+							<li><a href = "about-adam.ejs">Adam</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			
+			<hr class="featurette-divider">
+
+			<div class="row featurette">
+				<div class="col-md-5">
+					<img class="featurette-image img-responsive" src="../../public/img/Lauren.jpg" width="55%">
+				</div>
+				<div class="col-md-7">
+					<h2 class="featurette-heading"> Lauren <span class="text-muted"> Bilbo </span></h2>
+					<p class="lead"> Electrical Engineering </p>
+					<p class="text-muted"> University of Michigan, Ann Arbor</p>
+				</div>
+
+			</div>
+
+			<hr class="featurette-divider">	
+						
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading"> About Me</span></h2>
+					<p>Katniss Everdeen is a fictional character and the protagonist of The Hunger Games trilogy by Suzanne Collins. Her name comes from an edible plant called katniss. Academy Award-winning actress Jennifer Lawrence portrayed Katniss in the films The Hunger Games, and The Hunger Games: Catching Fire. She will reprise her role in the sequels The Hunger Games: Mockingjay – Part 1, and The Hunger Games: Mockingjay – Part 2.</p>
+					<p>Katniss and her family come from District 12, a coal-mining district that is the poorest and least populated district in the dystopian fictional autocratic nation of Panem. In the course of the first book, The Hunger Games, Katniss volunteers to replace her sister, Primrose "Prim" Everdeen, after she is called forth during Reaping Day, a day in which, annually, one male and one female tribute between the ages of 12 to 18 are called forth from each district to fight to the death in an arena and only one person can come out alive from all 24 people in what are known as the Hunger Games. Katniss, after an alliance with Rue from District 11 (who reminded Katniss of her own sister), a 12-year-old who had a very touching death, she joins up with fellow District 12 tribute Peeta Mellark, and the pair compete in the Games together. She uses her knowledge of hunting and archery to survive, and the two become the victors after defying the Capitol's attempt to force one to kill the other. Throughout the next two novels, Catching Fire and Mockingjay, Katniss becomes the symbol of a rebellion for the twelve districts against the Capitol's oppression.</p>
+				</div>
+
+				<div class = "col-md-3">
+					<h3 class = "text-muted"> Contact Info</h3>
+					<p> email: lgbilbo@umich.edu</p>
+					<p> phone: (512) 820-8711</p>
+				</div>
+
+
+			</div>
+
+			<hr class="featurette-divider">
+				
+		</div>
+		
+		<div class="modal fade" id="contact" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form class="form-horizontal">
+						<div class="modal-header">
+							<h4>Contact us</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for = "contact-name" class="col-lg-2 control-label">Name</label>
+								<div class="col-lg-10">
+									<input type = "text" class="form-control" id="contact-name" placeholder="full name"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for = "contact-email" class="col-lg-2 control-label">Email</label>
+								<div class="col-lg-10">
+									<input type = "email" class="form-control" id="contact-email" placeholder="email address"></input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for = "contact-message" class="col-lg-2 control-label">Message</label>
+								<div class="col-lg-10">
+
+									<textarea class="form-control" rows="8"></textarea>
+								
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Submit</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
