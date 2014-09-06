@@ -35,14 +35,14 @@ app.get('/home-dash', function(req, res) {
   var homeID = [];
   var homeUsers = [];
   var user = Parse.User.current();
-  var username;
+  var myUsername;
   var Home = Parse.Object.extend("Home");
   //Create a query
   var query = new Parse.Query(Home);
 
   //Put conditions on it
   user.fetch().then(function(user) {
-    username = user.get('username');
+    myUsername = user.get('username');
 
   }).then(function() {
     //retrieve an Array of matching Parse.Objects using find
@@ -55,11 +55,18 @@ app.get('/home-dash', function(req, res) {
           homeID.push( object.id );
           homeUsers.push( object.get('users') );
         }
+        var usernames = [];
+        for(var i = 0; i < homeUsers.length; i++){
+        var queryName = new Parse.Query(Parse.User);
+        queryName.equalTo( "objectId", homeUsers[i] );
+        queryName.first().then(function(user){ usernames.push(user.get('username'));});
+        }
         res.render('home-dash', {
           homeNames: homeNames,
           homeID: homeID,
           homeUsers: homeUsers,
-          username: username
+          myUsername: myUsername,
+          usernames: usernames
           });
       },
       error: function(error) {
