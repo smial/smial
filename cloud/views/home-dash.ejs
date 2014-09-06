@@ -5,7 +5,7 @@
     <title>My Homes</title>
   </head>
   <body>
-    <h1><a href="logout">logout</a></h1>
+    <h1>You are signed in as <%= username %><a href="logout">logout</a></h1>
 
     <form method="post" action="/createHome">
     <input name="nameHome" class="span2" type="text" placeholder="Give this house a name">
@@ -22,7 +22,7 @@
               ()
               <form method="post" action="/addUser">
               <input name="username" class="span2" type="text" placeholder="user_name">
-              <input name="homeID" value='<%= homeIDs[i] %>' >
+              <input name="homeID" value='<%= homeID[i] %>' >
               <button type="submit" class="btn">Add User</button>
               </form>
             </div>

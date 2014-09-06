@@ -32,8 +32,10 @@ app.get('/', function(req, res) {
 //Home Dashboard
 app.get('/home-dash', function(req, res) {
   var homeNames = [];
-  var homeIDs = [];
+  var homeID = [];
   var homeUsers = [];
+  var user = Parse.User.current();
+  var username = user.get('username');
   var Home = Parse.Object.extend("Home");
   //Create a query
   var query = new Parse.Query(Home);
@@ -48,10 +50,15 @@ app.get('/home-dash', function(req, res) {
       for (var i = 0; i < results.length; i++) {
         var object = results[i];
         homeNames.push( object.get('name') );
-        homeIDs.push( object.id );
+        homeID.push( object.id );
         homeUsers.push( object.get('users') );
       }
-      res.render('home-dash', { homeNames: homeNames, homeIDs : homeIDs, homeUsers: homeUsers });
+      res.render('home-dash', {
+        homeNames: homeNames,
+        homeID: homeID,
+        homeUsers: homeUsers,
+        username: username
+        });
     },
     error: function(error) {
       alert("Error: " + error.code + " " + error.message);
@@ -63,7 +70,6 @@ app.get('/home-dash', function(req, res) {
 //Adam did this, hes pretty drunk, might want to double check
 app.get('/about', function(req, res) {
     res.render('about');
-
 });
 
 app.get('/about-Lauren', function(req, res) {
@@ -85,29 +91,26 @@ app.get('/profile', function(req, res) {
 	var homeNames = [];
 	var User = Parse.Object.extend("User");
 	var user_query = new Parse.Query(User);
-	
+
 	user_query.find({
 		success: function(results) {
-		alert("Successfully retrieved " + results.length + " homes.");
-		for (var i = 0; i < results.length; i++) {
-			var object = results[i];
-			alert(object.id + ' - ' + object.get('username'));
-		}
-		res.render('profile', {profiles: results});
-	},
-	error: function(error) {
-		alert("Error: " + error.code _ " " _ error.message);
-	}
+      alert("Successfully retrieved " + results.length + " homes.");
+      for (var i = 0; i < results.length; i++) {
+      	var object = results[i];
+      	alert(object.id + '  ' + object.get('username'));
+      }
+      res.render('profile', {profiles: results});
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
 });
-});
-			
+
 
 //Home Nav Page
 app.get('/house_nav', function(req, res){
-
     res.render('house_nav');
-
-
 });
 
 //Grocery List Page
@@ -209,8 +212,9 @@ app.post('/addUser', function(req, res){
       var Home = Parse.Object.extend("Home");
       var query2 = new Parse.Query(Home);
 
-      console.log('This is the Id of the home to update:', req.body.homeID )
-      query2.get( req.body.homeID , {
+      console.log('This is the Id of the home to update:', JSON.stringify(req.body));
+      query2.equalTo( "id", req.body.homeID );
+      query2.find({
         success: function(home) {
           alert('found ' + home.length + ' homes: ' + JSON.stringify(home) );
           home.add("users", userToAdd.get('ObjectId') );
