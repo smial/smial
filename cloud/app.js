@@ -59,6 +59,49 @@ app.get('/home-dash', function(req, res) {
   });
 });
 
+//About pages
+//Adam did this, hes pretty drunk, might want to double check
+app.get('/about', function(req, res) {
+    res.render('about');
+
+});
+
+app.get('/about-Lauren', function(req, res) {
+	res.render('about-Lauren');
+});
+
+app.get('/about-Chening', function(req,res) {
+	res.render('about-Chening');
+});
+
+app.get('/about-Adam', function(req,res) {
+	res.render('about-Adam');
+});
+
+
+//Profile Nav Page
+//Adam did this, hes pretty drunk, might want to double check
+app.get('/profile', function(req, res) {
+	var homeNames = [];
+	var User = Parse.Object.extend("User");
+	var user_query = new Parse.Query(User);
+	
+	user_query.find({
+		success: function(results) {
+		alert("Successfully retrieved " + results.length + " homes.");
+		for (var i = 0; i < results.length; i++) {
+			var object = results[i];
+			alert(object.id + ' - ' + object.get('username'));
+		}
+		res.render('profile', {profiles: results});
+	},
+	error: function(error) {
+		alert("Error: " + error.code _ " " _ error.message);
+	}
+});
+});
+			
+
 //Home Nav Page
 app.get('/house_nav', function(req, res){
 
