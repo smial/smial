@@ -55,6 +55,27 @@ app.get('/home-dash', function(req, res) {
   });
 });
 
+//Home Nav Page
+app.get('/house_nav', function(req, res){
+	var groceryList = [];
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery = new Parse.Query(Grocery);
+	
+	query.find({
+	  success: function(results) {
+    alert("Successfully retrieved " + results.length + " scores.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) { 
+      var object = results[i];
+      alert(object.id + ' - ' + object.get('item_name'));
+    }
+    res.render('house_nav', {groceries: results});
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+});
 
 // LogIn
 app.post('/login', function(req, res) {
@@ -113,11 +134,14 @@ app.post('/createHome', function(req, res){
   });
 });
 
-// Define Grocery item:
-var Grocery = Parse.Object.extend("Grocery");
+
 
 // Make item name:
 app.post('/make_item', function(req, res){
+
+	// Define Grocery item:
+	var Grocery = Parse.Object.extend("Grocery");
+
 	var grocery = new Grocery();
 	grocery.set("item_name", item-name);
 	grocery.set("item_cost", item-cost);
