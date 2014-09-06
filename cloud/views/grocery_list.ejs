@@ -70,12 +70,9 @@
 		<div class="list-group col-md-5">
 		<% for(var i=0; i<groceries.length/2; i++) { %>
 			<a href="#" class="list-group-item">
-				var itemName = groceries[i].itemName;
-				var itemPrice = groceries[i].itemCost;
-				var itemNotes = groceries[i].itemNotes;
-				<h4><%=itemName%></h4>
-				<p><'itemCost'></p>
-				<p><itemNotes></p>
+				<h4><%= groceryName[i] %></h4>
+				<p><%= groceryCosts[i] %></p>
+				<p><%= groceryNotes[i] %></p>
 				<button class="btn btn-success"> Claim </button>
 				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
 				<button class="btn btn-danger pull-right"> Cancel </button>
