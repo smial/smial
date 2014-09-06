@@ -113,7 +113,18 @@ app.post('/createHome', function(req, res){
   });
 });
 
+// Define Grocery item:
+var Grocery = Parse.object.extend("Grocery");
 
+// Make item name:
+app.post('/make_item', function(req, res){
+	var grocery = new Grocery();
+	grocery.set("item_name", item-name);
+	grocery.set("item_cost", item-cost);
+	grocery.set("item_message", item-message);
+	//name, price, notes, who's in?
+
+});
 
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
