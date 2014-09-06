@@ -8,11 +8,46 @@ app.set('views', 'cloud/views');  // Specify the folder to find templates
 app.set('view engine', 'ejs');    // Set the template engine
 app.use(express.bodyParser());    // Middleware for reading request body
 
+
 //Home Page Route
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
-  res.render('hello', { message: 'This is the home page using the hello.ejs template' });
+  res.render('login', { message: 'Log in here:' });
+});
+
+//The login route
+app.post('/login', function(req, res){
+
+  Parse.User.logIn(req.body.username, req.body.password, {
+    success: function(user) {
+      console.log("It was a success!!!");
+    },
+    error: function(user, error) {
+      console.log("No user!!!", error);
+    }
+  });
+  console.log(req.body.username);
+  res.redirect('/');
+});
+
+//The signup route
+app.post('/signup', function(req, res){
+
+  var user = new Parse.User();
+  user.set("username", req.body.username);
+  user.set("password", req.body.password);
+
+  user.signUp(null, {
+    success: function(user) {
+      console.log('We just created a user', user);
+    },
+    error: function(user, error) {
+        alert("Error:" + error.code + " " + error.message);
+        console.log("Error:" + error.code + " " + error.message);
+    }
+  });
+  res.redirect('/');
 });
 
 // // Example reading from the request query string of an HTTP get request.
@@ -29,6 +64,7 @@ app.get('/', function(req, res) {
 
 // Attach the Express app to Cloud Code.
 app.listen();
+
 
 // Check to see if user is logged in
 // if (Parse.User.current()) {
