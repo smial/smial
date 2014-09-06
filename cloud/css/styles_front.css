@@ -1,0 +1,23 @@
+body {
+	padding: 0px;
+}
+
+#member1{
+	color: red;
+}
+
+#member2 {
+	color: blue;
+}
+
+#member3 {
+	color: green;
+}
+
+.jumbotron{
+    background: #CC33FF;
+}
+
+#img1 {
+	padding: 0px;
+}
