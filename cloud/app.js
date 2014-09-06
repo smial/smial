@@ -1,37 +1,46 @@
 
-// These two lines are required to initialize Express in Cloud Code.
+//initialize Express in Cloud Code
+//Require cookie and redirect modules
 var express = require('express');
+var parseExpressHttpsRedirect = require('parse-express-https-redirect');
+var parseExpressCookieSession = require('parse-express-cookie-session');
 var app = express();
 
 // Global app configuration section
 app.set('views', 'cloud/views');  // Specify the folder to find templates
 app.set('view engine', 'ejs');    // Set the template engine
-app.use(express.bodyParser());    // Middleware for reading request body
+app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
+app.use(express.bodyParser()); // Middleware for reading request body
+app.use(express.cookieParser('BarryWhiteChocolate'));
+app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
+
 
 
 //Home Page Route
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
-  res.render('login', { message: 'Log in here:' });
+  if (Parse.User.current()) {
+      res.render('hello', { message: 'Logged in'); //Ask parse how to get username...
+  }
+  else {
+    res.render('login', { message: 'Log in here:' });
+  }
+
 });
 
-//The login route
-app.post('/login', function(req, res){
-
-  Parse.User.logIn(req.body.username, req.body.password, {
-    success: function(user) {
-      console.log("It was a success!!!");
-    },
-    error: function(user, error) {
-      console.log("No user!!!", error);
-    }
+// LogIn
+app.post('/login', function(req, res) {
+  Parse.User.logIn(req.body.username, req.body.password).then(function() {
+    res.redirect('/');
+  },
+  function(error) {
+    res.redirect('/');
   });
-  console.log(req.body.username);
-  res.redirect('/');
 });
 
-//The signup route
+
+//SignUp and Login
 app.post('/signup', function(req, res){
 
   var user = new Parse.User();
@@ -41,14 +50,30 @@ app.post('/signup', function(req, res){
   user.signUp(null, {
     success: function(user) {
       console.log('We just created a user', user);
+
+      Parse.User.logIn(req.body.username, req.body.password).then(function() {
+        res.redirect('/');
+      },
+      function(error) {
+        res.redirect('/');
+      });
+
     },
     error: function(user, error) {
-        alert("Error:" + error.code + " " + error.message);
         console.log("Error:" + error.code + " " + error.message);
     }
   });
   res.redirect('/');
 });
+
+//Logout
+app.get('/logout', function(req, res) {
+  Parse.User.logOut();
+  res.redirect('/');
+});
+
+
+
 
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
@@ -64,11 +89,3 @@ app.post('/signup', function(req, res){
 
 // Attach the Express app to Cloud Code.
 app.listen();
-
-
-// Check to see if user is logged in
-// if (Parse.User.current()) {
-//   new SmialView();
-// } else {
-//   new LogInView();
-// }
