@@ -122,8 +122,16 @@ app.post('/make_item', function(req, res){
 	grocery.set("item_name", item-name);
 	grocery.set("item_cost", item-cost);
 	grocery.set("item_message", item-message);
+	
+	grocery.save(null, {
+		success: function(grocery) {
+		alert('New object created with objectId: ' + grocery.id);
+	  },
+	  error: function(grocery, error) {
+	  alert('Failed to create new object, with error code: Chening!');
+	  }
 	//name, price, notes, who's in?
-
+	});
 });
 
 // // Example reading from the request query string of an HTTP get request.
