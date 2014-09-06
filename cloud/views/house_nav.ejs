@@ -67,7 +67,7 @@
 
 				  <div class='example-chat-toolbar'>
 					<label for="nameInput">Username:</label>
-					<input type='text' id='nameInput' placeholder='enter a username...'>
+					<input type='text' id='nameInput' placeholder=Parse.User.current().get("username")>
 				  </div>
 
 				  <ul id='example-messages' class="example-chat-messages"></ul>
