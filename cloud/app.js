@@ -21,13 +21,40 @@ app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
   if (Parse.User.current()) {
-      res.render('hello', { message: 'Logged in'); //Ask parse how to get usernam
+    res.redirect('/home-dash');
   }
   else {
     res.render('login', { message: 'Log in here:' });
   }
 
 });
+
+//Home Dashboard
+app.get('/home-dash', function(req, res) {
+  var homeList = [];
+  var Home = Parse.Object.extend("Home");
+  //Create a query
+  var query = new Parse.Query(Home);
+
+  //Put conditions on it
+
+  //retrieve an Array of matching Parse.Objects using find
+  query.find({
+    success: function(results) {
+      alert("Successfully retrieved " + results.length + "results");
+      // Do something with the returned Parse.Object values
+      for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        homeList.push( object.get('name') );
+      }
+      res.render('home-dash', { message: homeList });
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+});
+
 
 // LogIn
 app.post('/login', function(req, res) {
@@ -40,7 +67,7 @@ app.post('/login', function(req, res) {
 });
 
 
-//SignUn
+//SignUp
 app.post('/signup', function(req, res){
 
   var user = new Parse.User();
@@ -64,6 +91,27 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+//Create a home
+app.post('/createHome', function(req, res){
+
+  //Create a class called home
+  var Home = Parse.Object.extend("Home");
+
+  //Create an instance of a home & name it
+  var home = new Home();
+    home.set("name", req.body.nameHome );
+
+    home.save(null, {
+    success: function(home) {
+      // Execute any logic that should take place after the object is saved.
+      alert('New object created with objectId: ' + home.id);
+      res.redirect('/home-dash');
+    },
+    error: function(home, error) {
+      alert('Failed to create new object, with error code: ' + error.message);
+    }
+  });
+});
 
 
 

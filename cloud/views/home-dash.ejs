@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Homes</title>
+  </head>
+  <body>
+    <h1><a href="logout">logout</a></h1>
+
+    <form method="post" action="/createHome">
+    <input name="nameHome" class="span2" type="text" placeholder="Give this house a name">
+    <button type="submit" class="btn">Create a new home</button>
+    </form>
+
+    <ul>
+    <% for(var i=0; i<message.length; i++) { %>
+        <li>
+            <a href='home/<%= message[i] %>'>
+                <%= message[i] %>
+            </a>
+        </li>
+    <% } %>
+    </ul>
+
+  </body>
+</html>
