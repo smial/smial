@@ -43,7 +43,7 @@ app.get('/home-dash', function(req, res) {
   //retrieve an Array of matching Parse.Objects using find
   query.find({
     success: function(results) {
-      alert("Successfully retrieved " + results.length + "results");
+      alert("Successfully retrieved " + results );
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) {
         var object = results[i];
@@ -147,7 +147,7 @@ app.post('/addUser', function(req, res){
   //Find Matches
   query.find({
     success: function(userToAdd) {
-      alert("Successfully retrieved " + results.length + " scores.");
+      alert("Successfully retrieved " + userToAdd.length + " scores.");
       var Home = Parse.Object.extend("Home");
       var query2 = new Parse.Query(Home);
       query.equalTo("id", req.body.homeID);
@@ -157,6 +157,7 @@ app.post('/addUser', function(req, res){
           alert('found home:');
           home.add("users", userToAdd);
           home.save();
+          res.redirect('/home-dash');
         },
         error: function(error) {
           alert("Error: " + error.code + " " + error.message);
