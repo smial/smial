@@ -280,24 +280,24 @@ app.post('/make_item', function(req, res){
 	});
 });
 
-//app.post('/delete_item', function(req, res){
+app.post('/delete_item', function(req, res){
 
-//	var Grocery = Parse.Object.extend("Grocery");
-//	var grocery_query = new Parse.Query(Grocery);
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
 	
-//	grocery_query(ident, {
-//		success: grocery_query.destroy({
-//			success: function(grocery_query){
-//				res.redirect('/grocery_list');
-//			},
-//			error: function(grocery_query, error){
-//			}
-//		}),
-//		error: function(grocery_query, error) {
-//		alert('Nope, didnt work');
-//		}
-//	});
-//});
+	grocery_query(req.body.ident.id, {
+		success: grocery_query.destroy({
+			success: function(grocery_query){
+				res.redirect('/grocery_list');
+			},
+			error: function(grocery_query, error){
+			}
+		}),
+		error: function(grocery_query, error) {
+		alert('Nope, didnt work');
+		}
+	});
+});
 
 
 //function myFunction(ident){
