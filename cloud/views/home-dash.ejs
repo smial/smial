@@ -22,7 +22,7 @@
               </a>
 
               <% for(var j=0; j<usernames.length; j++) { %>
-                <%= usernames[j] %>
+                <span><%= usernames[j] %></span>
               <% } %>
               <form method="post" action="/addUser">
               <input name="username" class="span2" type="text" placeholder="user_name">

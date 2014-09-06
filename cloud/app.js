@@ -53,13 +53,15 @@ app.get('/home-dash', function(req, res) {
           var object = results[i];
           homeNames.push( object.get('name') );
           homeID.push( object.id );
-          homeUsers.push( object.get('users') );
+          homeUsers.push( object.users );
+          console.log(object);console.log('object');
         }
         var usernames = [];
-        for(var i = 0; i < homeUsers.length; i++){
         var queryName = new Parse.Query(Parse.User);
-        queryName.equalTo( "objectId", homeUsers[i] );
-        queryName.first().then(function(user){ usernames.push(user.get('username'));});
+        for(var i = 0; i < homeUsers.length; i++){
+          queryName.equalTo( "objectId", homeUsers[i] );
+          queryName.first().then(function(user){ usernames.push('hello');});
+          console.log('usernames', usernames);
         }
         res.render('home-dash', {
           homeNames: homeNames,
@@ -272,7 +274,7 @@ app.post('/make_item', function(req, res){
 
 //	var Grocery = Parse.Object.extend("Grocery");
 //	var grocery_query = new Parse.Query(Grocery);
-	
+
 //	grocery_query(ident, {
 //		success: grocery_query.destroy({
 //			success: function(grocery_query){
@@ -291,7 +293,7 @@ app.post('/make_item', function(req, res){
 //function myFunction(ident){
 //	var Grocery = Parse.Object.extend("Grocery");
 //	var grocery_query = new Parse.Query(Grocery);
-	
+
 //	grocery_query(ident, {
 //		success: grocery_query.destroy({
 //			success: function(grocery_query){
