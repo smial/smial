@@ -21,7 +21,7 @@ app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
   if (Parse.User.current()) {
-      res.render('hello', { message: 'Logged in'); //Ask parse how to get username...
+      res.render('hello', { message: 'Logged in'); //Ask parse how to get usernam
   }
   else {
     res.render('login', { message: 'Log in here:' });
@@ -40,7 +40,7 @@ app.post('/login', function(req, res) {
 });
 
 
-//SignUp and Login
+//SignUn
 app.post('/signup', function(req, res){
 
   var user = new Parse.User();
@@ -50,14 +50,6 @@ app.post('/signup', function(req, res){
   user.signUp(null, {
     success: function(user) {
       console.log('We just created a user', user);
-
-      Parse.User.logIn(req.body.username, req.body.password).then(function() {
-        res.redirect('/');
-      },
-      function(error) {
-        res.redirect('/');
-      });
-
     },
     error: function(user, error) {
         console.log("Error:" + error.code + " " + error.message);
