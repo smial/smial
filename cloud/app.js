@@ -33,6 +33,7 @@ app.get('/', function(req, res) {
 app.get('/home-dash', function(req, res) {
   var homeNames = [];
   var homeIDs = [];
+  var homeUsers = [];
   var Home = Parse.Object.extend("Home");
   //Create a query
   var query = new Parse.Query(Home);
@@ -48,8 +49,9 @@ app.get('/home-dash', function(req, res) {
         var object = results[i];
         homeNames.push( object.get('name') );
         homeIDs.push( object.id );
+        homeUsers.push( object.get('users') );
       }
-      res.render('home-dash', { homeNames: homeNames, homeIDs : homeIDs });
+      res.render('home-dash', { homeNames: homeNames, homeIDs : homeIDs, homeUsers: homeUsers });
     },
     error: function(error) {
       alert("Error: " + error.code + " " + error.message);
@@ -102,6 +104,7 @@ app.post('/createHome', function(req, res){
   //Create an instance of a home & name it
   var home = new Home();
     home.set("name", req.body.nameHome );
+    home.set("users", [] );
 
     home.save(null, {
     success: function(home) {
@@ -113,6 +116,40 @@ app.post('/createHome', function(req, res){
       alert('Failed to create new object, with error code: ' + error.message);
     }
   });
+});
+
+//Add user to home
+app.post('/addUser', function(req, res){
+
+  var User = Parse.Object.extend("User");
+  var query = new Parse.Query(User); // Create a new query
+  query.equalTo("username", req.body.username); //Add Constraints
+  //Find Matches
+  query.find({
+  success: function(userToAdd) {
+    alert("Successfully retrieved " + results.length + " scores.");
+    var Home = Parse.Object.extend("Home");
+    var query2 = new Parse.Query(Home);
+    query.equalTo("id", req.body.homeID);
+
+    query.find({
+      success: function(home) {
+        alert('found home:');
+        home.add("users", userToAdd);
+        home.save();
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+
+
 });
 
 // Define Grocery item:

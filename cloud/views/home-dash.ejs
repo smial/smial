@@ -19,8 +19,9 @@
               <a href='home/<%= homeNames[i] %>'>
                 <%= homeNames[i] %>
               </a>
+              ()
               <form method="post" action="/addUser">
-              <input name="nameHome" class="span2" type="text" placeholder="user_name">
+              <input name="username" class="span2" type="text" placeholder="user_name">
               <input name="homeId" value='<%= homeIDs[i] %>' >
               <button type="submit" class="btn">Add User</button>
               </form>
