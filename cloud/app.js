@@ -45,12 +45,9 @@ app.get('/home-dash', function(req, res) {
     username = user.get('username');
 
   }).then(function() {
-
-
     //retrieve an Array of matching Parse.Objects using find
     query.find({
       success: function(results) {
-        alert("Successfully retrieved " + results );
         // Do something with the returned Parse.Object values
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
@@ -227,17 +224,17 @@ app.post('/addUser', function(req, res){
   query.equalTo("username", req.body.username); //Add Constraints
   //Find Matches
   query.find({
-    success: function(userToAdd) {
+    success: function(userToAdd, req) {
       alert("Successfully retrieved " + userToAdd.length + " instance(s) of userToAdd.");
       var Home = Parse.Object.extend("Home");
       var query2 = new Parse.Query(Home);
 
       console.log('This is the Id of the home to update:', JSON.stringify(req.body));
-      query2.equalTo( "id", req.body.homeID );
+      query2.equalTo( "objectId", req.body.homeID );
       query2.find({
         success: function(home) {
-          alert('found ' + home.length + ' homes: ' + JSON.stringify(home) );
-          home.add("users", userToAdd.get('ObjectId') );
+          console.log('SAVING', userToAdd.get('objectId') , 'TO HOME--USERS' );
+          home.add("users", userToAdd.get('objectId') );
           home.save();
           res.redirect('/home-dash');
         },
