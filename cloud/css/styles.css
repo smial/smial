@@ -1,0 +1,21 @@
+body {
+	padding: 80px;
+}
+
+navbar {
+	color: black;
+}
+
+#member1{
+	color: red;
+}
+
+#member2 {
+	color: blue;
+}
+
+#member3 {
+	color: green;
+}
+
+
