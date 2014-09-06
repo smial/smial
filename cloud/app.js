@@ -63,9 +63,9 @@ app.get('/home-dash', function(req, res) {
 app.get('/house_nav', function(req, res){
 	var groceryList = [];
 	var Grocery = Parse.Object.extend("Grocery");
-	var grocery = new Parse.Query(Grocery);
+	var grocery_query = new Parse.Query(Grocery);
 
-	query.find({
+	grocery_query.find({
 	  success: function(results) {
     alert("Successfully retrieved " + results.length + " scores.");
     // Do something with the returned Parse.Object values
