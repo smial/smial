@@ -136,7 +136,10 @@ app.get('/about_chening', function(req, res){
 
 //Grocery List Page
 app.get('/grocery_list', function(req, res){
-	var groceryList = [];
+	var groceryNames = [];
+	var groceryCosts = [];
+	var groceryNotes = [];
+	var groceryIDs = [];
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
 
@@ -146,9 +149,18 @@ app.get('/grocery_list', function(req, res){
     // Do something with the returned Parse.Object values
     for (var i = 0; i < results.length; i++) {
       var object = results[i];
-      alert(object.id + ' - ' + object.get('item_name'));
+      groceryNames.push(object.get('itemName'));
+      groceryCosts.push(object.get('itemCost'));
+      groceryNotes.push(object.get('itemNotes'));
+      groceryIDs.push(object.id);
+      alert(object.id + ' - ' + object.get('itemName'));
     }
-    res.render('grocery_list', { groceries: results });
+    res.render('grocery_list', {
+    	groceryNames: groceryNames
+    	groceryCosts: groceryCosts
+    	groceryNotes: groceryNotes
+    	groceryIDs: groceryIDs
+    	});
   },
 
   error: function(error) {
