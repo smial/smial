@@ -32,9 +32,9 @@
 
 				<div class = "collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="#">My House</a></li>
-						<li><a href="#">Profile</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="#">My House</a></li>
+						<li><a href="profile.ejs">Profile</a></li>
+						<li><a href="about.ejs">About</a></li>
 					</ul>
 				</div>
 			</div>
@@ -155,7 +155,7 @@
 								<label for = "item-name" class="col-lg-2 control-label">Item</label>
 								<div class="col-lg-10">
 						<!--	<form method="post" action="/item_name" class="pull-right"> -->
-									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
+									<input name="item-name" type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
 						<!--	</form> -->
 								</div>
 							</div>
@@ -163,7 +163,7 @@
 								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
 								<div class="col-lg-10">
 						<!--	<form method="post" action="/item_cost" class="pull-right"> -->
-									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
+									<input name="item-cost" type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
 						<!--	</form> -->
 								</div>
 							</div>
@@ -172,7 +172,7 @@
 								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
 								<div class="col-lg-10">
 						<!--	<form method="post" action="/item_notes" class="pull-right"> -->
-									<input type = "text" class="form_control" id="item-notes" placeholder="That's a lot of parsnips!"></input>
+									<input name="item-notes" type = "text" class="form_control" id="item-notes" placeholder="That's a lot of parsnips!"></input>
 						<!--	</form> -->
 								</div>
 							</div>

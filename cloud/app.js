@@ -178,9 +178,9 @@ app.post('/make_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 
 	var grocery = new Grocery();
-	grocery.set("item_name", item-name);
-	grocery.set("item_cost", item-cost);
-	grocery.set("item_message", item-message);
+	grocery.set("item_name", req.body.item-name);
+	grocery.set("item_cost", req.body.item-cost);
+	grocery.set("item_message", req.body.item-message);
 
 	grocery.save(null, {
 		success: function(grocery) {
@@ -189,6 +189,7 @@ app.post('/make_item', function(req, res){
 	  error: function(grocery, error) {
 	  alert('Failed to create new object, with error code: Chening!');
 	  }
+	  res.render('grocery_list');
 	//name, price, notes, who's in?
 	});
 });
