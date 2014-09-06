@@ -148,15 +148,15 @@ app.post('/addUser', function(req, res){
   //Find Matches
   query.find({
     success: function(userToAdd) {
-      alert("Successfully retrieved " + userToAdd.length + " user to Adds.");
+      alert("Successfully retrieved " + userToAdd.length + " instance(s) of userToAdd.");
       var Home = Parse.Object.extend("Home");
-      var query = new Parse.Query(Home);
+      var query2 = new Parse.Query(Home);
 
-      query.equalTo("id", req.body.homeID);
-      query.find({
+      console.log('This is the Id of the home to update:', req.body.homeID )
+      query2.get( req.body.homeID , {
         success: function(home) {
-          alert('found' + home.length + 'home: ' + JSON.stringify(home) );
-          home.add("users", userToAdd);
+          alert('found ' + home.length + 'homes: ' + JSON.stringify(home) );
+          home.add("users", userToAdd.id);
           home.save();
           res.redirect('/home-dash');
         },
@@ -180,16 +180,16 @@ app.post('/make_item', function(req, res){
 	var grocery = new Grocery();
 	grocery.set("item_name", req.body.item-name);
 	grocery.set("item_cost", req.body.item-cost);
-	grocery.set("item_message", req.body.item-message);
+	grocery.set("item_notes", req.body.item-notes);
 
 	grocery.save(null, {
 		success: function(grocery) {
-		alert('New object created with objectId: ' + grocery.id);
+  		alert('New grocery created with objectId: ' + grocery.id);
+      res.render('grocery_list');
 	  },
 	  error: function(grocery, error) {
-	  alert('Failed to create new object, with error code: Chening!');
+  	  alert('Failed to create new object, with error code: Chening!');
 	  }
-	  res.render('grocery_list');
 	//name, price, notes, who's in?
 	});
 });
