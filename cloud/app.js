@@ -47,7 +47,7 @@ app.get('/home-dash', function(req, res) {
         var object = results[i];
         homeList.push( object.get('name') );
       }
-      res.render('home-dash', { message: homeList });
+      res.render('home-dash', { homes: homeList });
     },
     error: function(error) {
       alert("Error: " + error.code + " " + error.message);
