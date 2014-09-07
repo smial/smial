@@ -17,7 +17,7 @@
     <% for(var i=0; i < homes.length; i++) { %>
         <li>
             <div>
-              <a href="<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" >
+              <a href="home/<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" >
                 <span><%= JSON.parse(JSON.stringify(homes[i])).name %></span>
               </a>
               <form method="post" action="/addUser">

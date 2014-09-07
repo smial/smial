@@ -14,6 +14,34 @@ app.use(express.cookieParser('BarryWhiteChocolate'));
 app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 
 
+//------------------------------AUTHENTICATION----------------------------------
+
+// LogIn
+app.post('/login', function(req, res) {
+  Parse.User.logIn(req.body.username, req.body.password).then(function() { res.redirect('/'); },
+  function(error) { res.redirect('/'); });
+});
+
+//SignUp
+app.post('/signup', function(req, res){
+
+  var user = new Parse.User();
+  user.set("username", req.body.username);
+  user.set("password", req.body.password);
+
+  user.signUp(null, {
+    success: function(user) { res.redirect('/'); },
+    error: function(user, error) {
+      console.log("Error:" + error.code + " " + error.message); res.redirect('/'); }
+  });
+});
+
+//Logout
+app.get('/logout', function(req, res) { Parse.User.logOut(); res.redirect('/'); });
+
+//-------------------------------------------------------------------------------
+
+
 
 //-------------------------------Top Bar -----------------------
 
@@ -46,7 +74,7 @@ app.get('/', function(req, res) {
 });
 
 
-//--------------------------Home Creation
+//--------------------------Home Creation-------------------------------------
 //Homes look like this:
 
 //Class = Homes
@@ -103,15 +131,16 @@ app.post('/updateHome', function(req, res){
 
 // Add user to home
 app.post('/addUser', function(req, res){
-  var user = { userName: req.body.userName, balance: 0};
+  var user = {userName: req.body.userName, balance: 0};
   var query = new Parse.Query(Homes);
   query.equalTo('objectId', req.body.homeId);
   query.first().then(function(home){
-    home.addUnique('user', user );
+    home.addUnique('user', user);
     home.save();
     res.redirect('home-dash');
   });
 });
+
 
 
 //Profile Nav Page
@@ -158,40 +187,9 @@ app.get('/grocery_list', function(req, res){
   });
 });
 
-// LogIn
-app.post('/login', function(req, res) {
-  Parse.User.logIn(req.body.username, req.body.password).then(function() {
-    res.redirect('/');
-  },
-  function(error) {
-    res.redirect('/');
-  });
-});
 
 
-//SignUp
-app.post('/signup', function(req, res){
 
-  var user = new Parse.User();
-  user.set("username", req.body.username);
-  user.set("password", req.body.password);
-
-  user.signUp(null, {
-    success: function(user) {
-      console.log('We just created a user', user);
-    },
-    error: function(user, error) {
-        console.log("Error:" + error.code + " " + error.message);
-    }
-  });
-  res.redirect('/');
-});
-
-//Logout
-app.get('/logout', function(req, res) {
-  Parse.User.logOut();
-  res.redirect('/');
-});
 
 // Make item name:
 app.post('/make_item', function(req, res){
