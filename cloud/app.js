@@ -73,8 +73,7 @@ app.get('/home-dash', function(req, res) {
 //Create a home
 app.post('/createHome', function(req, res){
   var user = { userId: '', userName: '', balance: 0};
-  var Homes = new Parse.Object.extend("Homes");
-  var home = new Home();
+  var home = new Homes();
   home.set('name', req.body.name);
   home.save();
 
@@ -85,6 +84,7 @@ app.post('/createHome', function(req, res){
   }.bind(this)).then(function(){
     home.set('user', user );
     home.save();
+    res.redirect('home-dash');
   }.bind(this));
 });
 
@@ -97,6 +97,7 @@ app.post('/updateHome', function(req, res){
   query.get(id).then(function(home){
     home.set('user', user);
     home.save();
+    res.redirect('home-dash');
   });
 });
 

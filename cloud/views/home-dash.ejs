@@ -14,15 +14,15 @@
     </form>
 
     <ul>
-    <% for(var i=0; i<homes.length; i++) { %>
+    <% for(var i=0; i < homes.length; i++) { %>
         <li>
             <div>
-              <a href='/<%=home.objectID[i] %>'>
-                <%= home[i].name %>
+              <a href="<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" >
+                <span><%= JSON.parse(JSON.stringify(homes[i])).name %></span>
               </a>
               <form method="post" action="/addUser">
               <input name="username" class="span2" type="text" placeholder="user_name">
-              <input  name="homeID" value='<%= homeID[i] %>' >
+              <input  name="homeID" value="<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" >
               <button type="submit" class="btn">Add User</button>
               </form>
             </div>
