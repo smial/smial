@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- 	Draft 1 of Mhacks IV project
+		Adam Karabatakis
+		Lauren Bilbo
+		Chening Duker
+-->
+
+<head>
+		<title> Smial </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href = "../css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../css/styles_list.css" rel = "stylesheet">
+		<script src = "../js/jquery.js"></script>
+        <script src = "../js/bootstrap.js"></script>
+
+</head>
+	
+	<!-- ============ START OF BODY ========== -->
+
+	<body>
+		<div class = "navbar navbar-inverse navbar-fixed-top">
+			<div class = "container">
+				<a href = "#" class = "navbar-brand"> Smial </a>
+
+				<button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="house_nav">My House</a></li>
+						<li ><a href="profile">Profile</a></li>
+						<li><a href="about">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		Parse.Cloud.httpRequest({
+			method: 'POST',
+			url: 'http://api.venmo.com/v1/payments',
+ 			body: {
+  			title: 'Vote for Pedro',
+			body: 'If you vote for Pedro, your wildest dreams will come true'
+			},
+			success: function(httpResponse) {
+				console.log(httpResponse.text);
+			},
+			error: function(httpResponse) {
+				console.error('Request failed with response code ' + httpResponse.status);
+  }
+});
+
+
+
+		<div class="container">
+			<div class="panel panel-default panel-body text-center">
+				<h1> Payment Schedule</h1>
+			</div>
+		</div>
+
+		<div class="list-group col-md-5">
+		
+		<script>
+		var highest() {
+			var highPerson = 0;
+			var high = 0;
+			for( var i = 1; i < House.length; ++i ) {
+				if ( House[i][3] > high ) {
+					high = House[i][3];
+					highPerson = i;
+				}
+			}
+			return highPerson;
+		}
+		
+		var lowest() {
+			var lowPerson = 0;
+			var low = 0;
+			for( var i = 1; i < House.length; ++i ){
+				if ( House[i][3] < low ) {
+					low = House[i][3];
+					lowPerson = i;
+				}
+			}
+			return lowPerson;
+		}
+		
+		while( highest() > 0 & lowest() < 0 ) {
+			var payer = highest();
+			var payee = lowest();
+			var amnt = min( highest(), absolute( lowest() ) );
+			House[ payer ][3] = House[ payer ][3] - amnt;
+			House[ payee ][3] = House[ payee ][3] + amnt;
+			
+			<a href="#" class="list-group-item"> 
+				<h4> <%= House[payer][2] %> </h4> 
+				<p> <%= House[payee][2] %></p> 
+				<p> $<%= amnt %></p>
+			</a>
+		}
+		</script>
+	</body>
+
+</html>

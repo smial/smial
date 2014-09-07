@@ -68,18 +68,23 @@
 		</div>
 
 		<div class="list-group col-md-5">
-		<% for(var i=0; i<groceryNames.length/2; i++) { %>
+		<% for(var i=0; i<groceryNames.length; i += 2) { %>
 			<a href="#" class="list-group-item">
 				<h4><%= groceryNames[i] %></h4>
 				<p><%= groceryCosts[i] %></p>
 				<p><%= groceryNotes[i] %></p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<form method="post" action="/delete_item" class="form-horizontal pole-right"> 
-		<!--	<button class="btn btn-danger pull-right" onclick="myFunction('groceryIDs[i]')" data-button= "groceryIDs[i]"> Cancel </button> -->
-				<button class="btn btn-danger pull-right"> Cancel </button>
-				<input name="ident" type = "hidden" class="form-control" value='groceryIDs[i]'></input> 
-				</form> 
+				
+				<div class="btn-toolbar">
+					<form method="post" action="/adj_acnt" class="form-horizontal"> 
+					<button class="btn btn-success pull-left" > Claim </button>
+					<input name="claim" type = "hidden" class="form-control" value= <%= {groceryIDs[i], Parse.User.current().getUsername()} %> ></input> 
+					</form> 
+					
+					<form method="post" action="/delete_item" class="form-horizontal"> 
+					<button class="btn btn-danger pull-right" > Cancel </button>
+					<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
+					</form> 
+				</div>
 			</a>
 			 <% } %>
 
@@ -88,47 +93,57 @@
 
 		<div class="col-md-2"></div>
 		<div class="list-group col-md-5">
-		<% for(var i=groceryNames.length/2+1; i<groceryNames.length; i++) { %>
+
+		<% for(var i=1; i<groceryNames.length; i+= 2) { %>
 			<a href="#" class="list-group-item">
 				<h4><%= groceryNames[i] %></h4>
 				<p><%= groceryCosts[i] %></p>
 				<p><%= groceryNotes[i] %></p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
+
+				<div class="btn-toolbar">
+					<form method="post" action="/adj_acnt" class="form-horizontal"> 
+					<button class="btn btn-success pull-left" > Claim </button>
+					<input name="claim" type = "hidden" class="form-control" value= <%= {groceryIDs[i], Parse.User.current().getUsername()} %> ></input> 
+					</form> 
+					
+					<form method="post" action="/delete_item" class="form-horizontal"> 
+					<button class="btn btn-danger pull-right" > Cancel </button>
+					<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
+					</form> 
+				</div>
+
 			</a>
 			 <% } %>
 
 		</div>
-
-
+		
 		<div class="modal" id="add" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form class="form-horizontal">
+					<form method="post" action="/make_item" class="form-horizontal">
+
 						<div class="modal-header">
 							<h4>Request an Item</h4>
 						</div>
+
 						<div class="modal-body">
 							<div class="form-group">
 								<label for = "item-name" class="col-lg-2 control-label">Item</label>
 								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
+									<input name="itemName" type = "text" class="form-control" id="itemName" placeholder="Parsnips"></input>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
 								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
+									<input name="itemCost" type = "text" class="form-control" id="itemCost" placeholder="$14.00"></input>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
+								<label for = "item-notes" class="col-lg-2 control-label">Notes</label>
 								<div class="col-lg-10">
-
-									<textarea class="form-control" rows="8" placeholder="That's a lot of parsnips"></textarea>
-
+									<input name="itemNotes" type = "text" class="form_control" id="itemNotes" placeholder="That's a lot of parsnips!"></input>
 								</div>
 							</div>
 
@@ -136,18 +151,19 @@
 								<label for = "item-members" class="col-lg-2 control-label">Who's In</label>
 								<div class="col-lg-10">
 									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adam Karabatakis
+									  <input type="checkbox" id="inlineCheckbox1" value="option1"> Adam Karabatakis
 									</label>
 									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox2" value="option2" checked> Lauren Bilbo
+									  <input type="checkbox" id="inlineCheckbox2" value="option2"> Lauren Bilbo
 									</label>
 									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox3" value="option3" checked> Chening Duker
+									  <input type="checkbox" id="inlineCheckbox3" value="option3"> Chening Duker
 									</label>
 								</div>
 							</div>
 
 						</div>
+
 						<div class="modal-footer">
 							<button class="btn btn-primary" type="submit">Submit</button>
 							<a class="btn btn-default" data-dismiss="modal">Close</a>
@@ -157,60 +173,7 @@
 			</div>
 		</div>
 
-		<div class="modal" id="edit" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form class="form-horizontal">
-						<div class="modal-header">
-							<h4>Request an Item</h4>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label for = "item-name" class="col-lg-2 control-label">Item</label>
-								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
-								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
-								</div>
-							</div>
 
-							<div class="form-group">
-								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
-								<div class="col-lg-10">
-
-									<textarea class="form-control" rows="8" placeholder="That's a lot of parsnips"></textarea>
-
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for = "item-members" class="col-lg-2 control-label">Who's In</label>
-								<div class="col-lg-10">
-									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adam Karabatakis
-									</label>
-									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox2" value="option2" checked> Lauren Bilbo
-									</label>
-									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox3" value="option3" checked> Chening Duker
-									</label>
-								</div>
-							</div>
-
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" type="submit">Submit</button>
-							<a class="btn btn-default" data-dismiss="modal">Close</a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 	</body>
 
 </html>

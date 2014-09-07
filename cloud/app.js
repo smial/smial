@@ -31,8 +31,7 @@ app.post('/signup', function(req, res){
 
   user.signUp(null, {
     success: function(user) { res.redirect('/'); },
-    error: function(user, error) {
-      console.log("Error:" + error.code + " " + error.message); res.redirect('/'); }
+    error: function(user, error) { res.redirect('/'); }
   });
 });
 
@@ -64,6 +63,10 @@ app.get('/about-adam', function(req,res) {
 });
 
 //--------------------------------------------------------------
+
+app.get('/clear_balance', function(req, res) {
+	res.render('clear_balance');
+});
 
 
 
@@ -116,6 +119,48 @@ app.post('/createHome', function(req, res){
   }.bind(this));
 });
 
+
+//Grocery List Page
+app.get('/grocery_list', function(req, res){
+	var groceryNames = [];
+	var groceryCosts = [];
+	var groceryNotes = [];
+//	var option1 = [];
+//	var option2 = [];
+//	var option3 = [];
+	var groceryIDs = [];
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
+
+	grocery_query.find({
+	  success: function(results) {
+    alert("Successfully retrieved " + results.length + " groceries.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+    	var object = results[i];
+		groceryNames.push(object.get('itemName'));
+		groceryCosts.push(object.get('itemCost'));
+		groceryNotes.push(object.get('itemNotes'));
+	//	option1.push(object.get('option1'));
+	//	option2.push(object.get('option2'));
+	//	option3.push(object.get('option3'));
+		groceryIDs.push(object.id);
+
+    	alert(object.id + ' - ' + object.get('item_name'));
+    }
+    res.render('grocery_list', {
+    	groceryNames: groceryNames,
+    	groceryCosts: groceryCosts,
+    	groceryNotes: groceryNotes,
+    	groceryIDs: groceryIDs});
+  },
+
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+
+});
+
 //Update a home
 app.post('/updateHome', function(req, res){
   var user = req.body.home.user;
@@ -164,33 +209,6 @@ app.get('/profile', function(req, res) {
   });
 });
 
-
-//Grocery List Page
-app.get('/grocery_list', function(req, res){
-	var groceryList = [];
-	var Grocery = Parse.Object.extend("Grocery");
-	var grocery_query = new Parse.Query(Grocery);
-
-	grocery_query.find({
-	  success: function(results) {
-      alert("Successfully retrieved " + results.length + " groceries.");
-      // Do something with the returned Parse.Object values
-      for (var i = 0; i < results.length; i++) {
-        var object = results[i];
-        alert(object.id + ' - ' + object.get('item_name'));
-      }
-      res.render('grocery_list', { groceries: results });
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
-});
-
-
-
-
-
 // Make item name:
 app.post('/make_item', function(req, res){
 
@@ -201,7 +219,6 @@ app.post('/make_item', function(req, res){
 	grocery.set("itemName", req.body.itemName);
 	grocery.set("itemCost", req.body.itemCost);
 	grocery.set("itemNotes", req.body.itemNotes);
-
 
 	grocery.save(null, {
 		success: function(grocery) {
@@ -215,55 +232,81 @@ app.post('/make_item', function(req, res){
 	});
 });
 
-//app.post('/delete_item', function(req, res){
 
-//	var Grocery = Parse.Object.extend("Grocery");
-//	var grocery_query = new Parse.Query(Grocery);
+app.post('/delete_item', function(req, res){
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
 
-//	grocery_query(ident, {
-//		success: grocery_query.destroy({
-//			success: function(grocery_query){
-//				res.redirect('/grocery_list');
-//			},
-//			error: function(grocery_query, error){
-//			}
-//		}),
-//		error: function(grocery_query, error) {
-//		alert('Nope, didnt work');
-//		}
-//	});
-//});
-
-
-//function myFunction(ident){
-//	var Grocery = Parse.Object.extend("Grocery");
-//	var grocery_query = new Parse.Query(Grocery);
-
-//	grocery_query(ident, {
-//		success: grocery_query.destroy({
-//			success: function(grocery_query){
-//			},
-//			error: function(grocery_query, error){
-//			}
-//			}),
-//		error: function(grocery, error) {
-//		alert('Nope, didnt work');
-//		}
-//});
-//}
+	grocery_query.get( req.body.ident, {
+		success: function(this_grocery){
+			this_grocery.destroy({
+				success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+		},
+		error: function(grocery_query, error) {
+		alert('Nope, didnt work');
+		}
+	});
+});
 
 
-// // Example reading from the request query string of an HTTP get request.
-// app.get('/test', function(req, res) {
-//   // GET http://example.parseapp.com/test?message=hello
-//   res.send(req.query.message);
-// });
+app.post('/adj_acnt', function(req, res){
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
 
-// // Example reading from the request body of an HTTP post request.
-// app.post('/test', function(req, res) {
-//   // POST http://example.parseapp.com/test (with request body "message=hello")
-//   res.send(req.body.message);
-// });
+	grocery_query.get( req.body.claim[0], {
+		success: function(this_grocery){
+			var cost = this_grocery.get("itemCost");
+			var members = this_grocery.get("itemMembers");
+			for( var i = 0; i < members.length; i++) {
+				var member_id = members[i]
+
+				var User = Parse.Object.extend("User");
+				var user_query = new Parse.Query(User);
+
+				user_query.get( member_id, {
+					success: function(this_user){
+						var current_balance = this_user.get("balance");
+						this_user.set("balance", current_balance - (cost / members.length) );
+					},
+					error: function(user_query, error){
+					}
+				});
+			};
+
+			var User = Parse.Object.extend("User");
+			var user_query = new Parse.Query(User);
+
+
+
+			user_query.get( req.body.claim[1], {
+				success: function(this_user){
+					var current_balance = this_user.get("balance");
+					this_user.set("balance", current_balance + cost);
+				},
+				error: function(user_query, error) {
+				}
+			});
+
+
+			this_grocery.destroy({
+				success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+
+		},
+		error: function(grocery_query, error){
+		}
+	});
+});
+
 
 // Attach the Express app to Cloud Code.
 app.listen();

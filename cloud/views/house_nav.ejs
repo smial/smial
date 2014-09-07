@@ -40,6 +40,7 @@
 			</div>
 		</div>
 
+		<!--
 		<div class="container">
 			<div class="panel panel-default panel-body">
 				<h1> 1028 Packard</h1>
@@ -58,6 +59,7 @@
 				</table>
 			</div>
 		</div>
+		-->
 
 		<div class="container">
 			<div class = "col-md-8">
@@ -67,7 +69,7 @@
 
 				  <div class='example-chat-toolbar'>
 					<label for="nameInput">Username:</label>
-					<input type='text' id='nameInput' placeholder= $('Parce.User.current().get("username")')>
+					<input type='text' id='nameInput' placeholder= 'username'>
 				  </div>
 
 				  <ul id='example-messages' class="example-chat-messages"></ul>
@@ -82,6 +84,8 @@
 				  // CREATE A REFERENCE TO FIREBASE
 				  var messagesRef = new Firebase('https://faup3jrmabj.firebaseio-demo.com/');
 
+				  var user = Parse.User.current();
+				  user.getUsername();
 				  // REGISTER DOM ELEMENTS
 				  var messageField = $('#messageInput');
 				  var nameField = $('#nameInput');
@@ -130,18 +134,17 @@
 
 				<div class="panel panel-default panel-body text-center">
 					<h3><strong>Generate Payments</strong></h3>
-					<button type="button" class="btn btn-primary btn-lg">Create!</button>
+					<a class="btn btn-primary btn-lg" href="clear_balance">Create!</a>
 				</div>
 				<div class="panel panel-default panel-body text-center">
-					<h3><strong>See Previous Payments</strong></h3>
-					<button type="button" class="btn btn-primary btn-lg">See Full List</button>
+					<h3><strong>See Previous Purchases</strong></h3>
+					<a class="btn btn-primary btn-lg" href="profile">See Full List</a>
 				</div>
 			</div>
 		</div>
 
 
-
-
+		
 		<div class="modal" id="add" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">

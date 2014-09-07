@@ -44,6 +44,36 @@
 			</div>
 		</div>
 
+
+
+
+
+
+
+		<table style="width:100%">
+  			<tr>
+  				<th>Person who Paid</th>
+  				<th>Item</th>
+  				<th>Amount to be Reimbursed</th>
+  				<th>Notes</th>
+  			</tr>
+
+		<% for(var i=0; i<items.length; ++i) { %>
+  			<tr>
+  				<td></td>
+    			<td>groceryNames[i]</td>
+  				<td>groceryCosts[i]</td>
+  				<td>groceryNotes[i]</td>
+  			</tr>
+  		<% } %>
+		</table>
+
+
+
+
+
+
+
 		<div class="container">
 			<div class="panel panel-default panel-body">
 				<table class="table table-bordered">
