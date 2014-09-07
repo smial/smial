@@ -70,8 +70,13 @@
 		<div class="col-md-2"></div>
 		
 		<div class="list-group col-md-3">
+
 			<form id="payForm" onsubmit="return submitFn()" method="POST" action='http://api.venmo.com/v1/payments' >
 			<div class="form-group">
+
+			<form id="payForm">
+
+
 				<label for = "user_id" class=" control-label">Venmo User ID</label>
 				<input name="user_id" type = "text" class="form-control"></input>
 				
@@ -81,9 +86,13 @@
 				<label for = "amount" class="control-label">Payment Amount</label>
 				<input name="amount" type = "text" class="form-control"></input>
 				
+
 				<button class="btn btn-primary" type="submit" >Submit</button>
 			
 			</div>
+
+				<button class="btn btn-primary" type="submit" onclick="submitFn()">Submit</button>
+
 			</form>
 		</div>
 
@@ -114,6 +123,11 @@
 				res.redirect('/');
   }
 });
+
+
+			function submitFn() {
+				var access_token = JSON.parse(JSON.stringify(req.query)).access_token;
+				Parse.Cloud.httpRequest("payForm", access_token);
 
 			}
 //
