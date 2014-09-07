@@ -52,16 +52,18 @@
 
 		<table style="width:100%">
   			<tr>
+  				<th>Person who Paid</th>
   				<th>Item</th>
-  				<th>Person Owed</th>
-  				<th>Amount Owed</th>
+  				<th>Amount to be Reimbursed</th>
+  				<th>Notes</th>
   			</tr>
 
 		<% for(var i=0; i<items.length; ++i) { %>
   			<tr>
-    			<td>items[i]</td>
-  				<td>people[i]</td>
-  				<td>amount_receiving[i]</td>
+  				<td></td>
+    			<td>groceryNames[i]</td>
+  				<td>groceryCosts[i]</td>
+  				<td>groceryNotes[i]</td>
   			</tr>
   		<% } %>
 		</table>

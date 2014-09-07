@@ -38,6 +38,24 @@
 			</div>
 		</div>
 
+
+		Parse.Cloud.httpRequest({
+			method: 'POST',
+			url: 'http://api.venmo.com/v1/payments',
+ 			body: {
+  			title: 'Vote for Pedro',
+			body: 'If you vote for Pedro, your wildest dreams will come true'
+			},
+			success: function(httpResponse) {
+				console.log(httpResponse.text);
+			},
+			error: function(httpResponse) {
+				console.error('Request failed with response code ' + httpResponse.status);
+  }
+});
+
+
+
 		<div class="container">
 			<div class="panel panel-default panel-body text-center">
 				<h1> Payment Schedule</h1>

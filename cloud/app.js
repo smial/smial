@@ -83,6 +83,10 @@ app.get('/about', function(req, res) {
     res.render('about');
 });
 
+app.get('/clear_balance', function(req, res) {
+    res.render('clear_balance');
+});
+
 app.get('/about-Lauren', function(req, res) {
 	res.render('about-Lauren');
 });
