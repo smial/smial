@@ -289,6 +289,7 @@ app.post('/make_item', function(req, res){
 	});
 });
 
+
 app.post('/delete_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
@@ -308,7 +309,8 @@ app.post('/delete_item', function(req, res){
 		}
 	});
 });
-/*
+
+
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
@@ -325,9 +327,13 @@ app.post('/adj_acnt', function(req, res){
 				
 				user_query.get( member_id, {
 					success: function(this_user){
-						this_user.set("balance", balance - (cost / members.length)
-			
-			//---Do stuff here--//
+						var current_balance = this_user.get("balance");
+						this_user.set("balance", current_balance - (cost / members.length) );
+					},
+					error: function(user_query, error){
+					}
+				});
+			};
 			
 			this_grocery.destroy({
 				success: function(grocery_query){
@@ -336,13 +342,12 @@ app.post('/adj_acnt', function(req, res){
 				error: function(grocery_query, error){
 				}
 			});
-		},	
-		error: function(grocery_query, error) {
-		alert('Nope, didnt work');
+			
+		},
+		error: function(grocery_query, error){
 		}
 	});
 });
-*/
 		
 	/*	
 			this_grocery.destroy({
