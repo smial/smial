@@ -70,7 +70,7 @@
 		<div class="col-md-2"></div>
 		
 		<div class="list-group col-md-3">
-			<form id="payForm" action="form_action.asp">
+			<form id="payForm" onsubmit="return submitFn()" method="POST" action='http://api.venmo.com/v1/payments' >
 			<div class="form-group">
 				<label for = "user_id" class=" control-label">Venmo User ID</label>
 				<input name="user_id" type = "text" class="form-control"></input>
@@ -81,7 +81,7 @@
 				<label for = "amount" class="control-label">Payment Amount</label>
 				<input name="amount" type = "text" class="form-control"></input>
 				
-				<button class="btn btn-primary" type="submit" onclick="submitFn()">Submit</button>
+				<button class="btn btn-primary" type="submit" >Submit</button>
 			
 			</div>
 			</form>
@@ -91,6 +91,8 @@
 
 
 		<script>
+		function submitFn(e){
+		e.stopPropagation();
 		var access_token = JSON.parse(JSON.stringify(req.query)).access_token;
 		
 		Parse.Cloud.httpRequest({
@@ -109,11 +111,10 @@
 			},
 			error: function(httpResponse) {
 				console.error('Request failed with response code ' + httpResponse.status);
+				res.redirect('/');
   }
 });
 
-			function submitFn() {
-				document.Parse.Cloud.httpRequest("payForm").submit();
 			}
 //
 // </script>
