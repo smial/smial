@@ -276,7 +276,6 @@ app.post('/make_item', function(req, res){
 //	grocery.set("option2", option2);
 //	grocery.set("option3", option3);
 
-
 	grocery.save(null, {
 		success: function(grocery) {
   		alert('New grocery created with objectId: ' + grocery.id);
@@ -310,7 +309,6 @@ app.post('/delete_item', function(req, res){
 		}
 	});
 });
-
 
 //function myFunction(ident){
 //	var Grocery = Parse.Object.extend("Grocery");
