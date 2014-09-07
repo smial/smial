@@ -1,4 +1,3 @@
-
 //initialize Express in Cloud Code
 //Require cookie and redirect modules
 var express = require('express');
@@ -15,67 +14,35 @@ app.use(express.cookieParser('BarryWhiteChocolate'));
 app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 
 
+//------------------------------AUTHENTICATION----------------------------------
 
-//Home Page Route
-// This is an example of hooking up a request handler with a specific request
-// path and HTTP verb using the Express routing API.
-app.get('/', function(req, res) {
-  if (Parse.User.current()) {
-    res.redirect('/home-dash');
-  }
-  else {
-    res.render('login', { message: 'Log in here:' });
-  }
-
+// LogIn
+app.post('/login', function(req, res) {
+  Parse.User.logIn(req.body.username, req.body.password).then(function() { res.redirect('/'); },
+  function(error) { res.redirect('/'); });
 });
 
-//Home Dashboard
-app.get('/home-dash', function(req, res) {
-  var homeNames = [];
-  var homeID = [];
-  var homeUsers = [];
-  var user = Parse.User.current();
-  var myUsername;
-  var Home = Parse.Object.extend("Home");
-  //Create a query
-  var query = new Parse.Query(Home);
+//SignUp
+app.post('/signup', function(req, res){
 
-  //Put conditions on it
-  user.fetch().then(function(user) {
-    myUsername = user.get('username');
+  var user = new Parse.User();
+  user.set("username", req.body.username);
+  user.set("password", req.body.password);
 
-  }).then(function() {
-    //retrieve an Array of matching Parse.Objects using find
-    query.find({
-      success: function(results) {
-        // Do something with the returned Parse.Object values
-        for (var i = 0; i < results.length; i++) {
-          var object = results[i];
-          homeNames.push( object.get('name') );
-          homeID.push( object.id );
-          homeUsers.push( object.get('users') );
-        }
-        var usernames = [];
-        for(var i = 0; i < homeUsers.length; i++){
-        var queryName = new Parse.Query(Parse.User);
-        queryName.equalTo( "objectId", homeUsers[i] );
-        queryName.first().then(function(user){ usernames.push(user.get('username'));});
-        }
-        res.render('home-dash', {
-          homeNames: homeNames,
-          homeID: homeID,
-          homeUsers: homeUsers,
-          myUsername: myUsername,
-          usernames: usernames
-          });
-      },
-      error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
-
+  user.signUp(null, {
+    success: function(user) { res.redirect('/'); },
+    error: function(user, error) { res.redirect('/'); }
   });
 });
+
+//Logout
+app.get('/logout', function(req, res) { Parse.User.logOut(); res.redirect('/'); });
+
+//-------------------------------------------------------------------------------
+
+
+
+//-------------------------------Top Bar -----------------------
 
 //About pages
 //Adam did this, hes pretty drunk, might want to double check
@@ -83,26 +50,25 @@ app.get('/about', function(req, res) {
     res.render('about');
 });
 
-app.get('/clear_balance', function(req, res) {
-    res.render('clear_balance');
+app.get('/about-lauren', function(req, res) {
+  res.render('about-lauren');
 });
 
-app.get('/about-Lauren', function(req, res) {
-	res.render('about-Lauren');
+app.get('/about-chening', function(req,res) {
+  res.render('about-chening');
 });
 
-app.get('/about-Chening', function(req,res) {
-	res.render('about-Chening');
+app.get('/about-adam', function(req,res) {
+  res.render('about-adam');
 });
 
-app.get('/about-Adam', function(req,res) {
-	res.render('about-Adam');
-});
+//--------------------------------------------------------------
 
 app.get('/clear_balance', function(req, res) {
 	res.render('clear_balance');
 });
 
+<<<<<<< HEAD
 /*
 //Profile Nav Page
 //Adam did this, hes pretty drunk, might want to double check
@@ -125,26 +91,59 @@ app.get('/profile', function(req, res) {
   });
 });
 */
+=======
 
-//Home Nav Page
-app.get('/house_nav', function(req, res){
-    res.render('house_nav');
+>>>>>>> origin/master
+
+//Root
+app.get('/', function(req, res) {
+  if (Parse.User.current()) { res.redirect('home-dash'); }
+  else { res.render('login'); }
 });
 
-//
-app.get('/about_adam', function(req, res){
 
-    res.render('about_adam');
+//--------------------------Home Creation-------------------------------------
+//Homes look like this:
 
+//Class = Homes
+//Instance = ObjectId: XXXX, user: {userName: XXX, balance: 444 }
+////It is worth noting username is used as a unique id
+
+var Homes = Parse.Object.extend("Homes");
+
+//Home Dashboard
+app.get('/home-dash', function(req, res) {
+
+  var me;
+  var homes;
+  Parse.User.current().fetch().then(function(_me){ me = _me.get('username');}.bind(this)).then(function(){
+    var query = new Parse.Query(Homes);
+    query.find().then(function(result){
+      homes = result;
+    }.bind(this)).then(function(){
+      res.render('home-dash', { homes: homes, me: me });
+    }.bind(this));
+  }.bind(this));
 
 });
 
-app.get('/about_chening', function(req, res){
+//Create a home
+app.post('/createHome', function(req, res){
+  var user = {userName: '', balance: 0};
+  var home = new Homes();
+  home.set('name', req.body.name);
+  home.save();
 
-    res.render('about_chening');
-
-
+  Parse.User.current().fetch().then(function(_me){
+    user.userName = _me.get('username');
+    user.balance = 0;
+  }.bind(this)).then(function(){
+    home.set('user', [user] );
+    home.save();
+    res.redirect('home-dash');
+  }.bind(this));
 });
+
 
 //Grocery List Page
 app.get('/grocery_list', function(req, res){
@@ -171,10 +170,10 @@ app.get('/grocery_list', function(req, res){
 	//	option2.push(object.get('option2'));
 	//	option3.push(object.get('option3'));
 		groceryIDs.push(object.id);
-		
+
     	alert(object.id + ' - ' + object.get('item_name'));
     }
-    res.render('grocery_list', {  
+    res.render('grocery_list', {
     	groceryNames: groceryNames,
     	groceryCosts: groceryCosts,
     	groceryNotes: groceryNotes,
@@ -185,89 +184,54 @@ app.get('/grocery_list', function(req, res){
     alert("Error: " + error.code + " " + error.message);
   }
 
-
 });
 
-
-});
-
-// LogIn
-app.post('/login', function(req, res) {
-  Parse.User.logIn(req.body.username, req.body.password).then(function() {
-    res.redirect('/');
-  },
-  function(error) {
-    res.redirect('/');
+//Update a home
+app.post('/updateHome', function(req, res){
+  var user = req.body.home.user;
+  var id = req.body.home.ObjectId;
+  var query = new Parse.Query(Homes);
+  query.include('user');
+  query.get(id).then(function(home){
+    home.set('user', [user] );
+    home.save();
+    res.redirect('home-dash');
   });
 });
 
-
-//SignUp
-app.post('/signup', function(req, res){
-
-  var user = new Parse.User();
-  user.set("username", req.body.username);
-  user.set("password", req.body.password);
-
-  user.signUp(null, {
-    success: function(user) {
-      console.log('We just created a user', user);
-    },
-    error: function(user, error) {
-        console.log("Error:" + error.code + " " + error.message);
-    }
-  });
-  res.redirect('/');
-});
-
-//Logout
-app.get('/logout', function(req, res) {
-  Parse.User.logOut();
-  res.redirect('/');
-});
-
-//Create a home
-app.post('/createHome', function(req, res){
-
-  //Create a class called home
-  var Home = Parse.Object.extend("Home");
-
-  //Create an instance of a home & name it
-  var home = new Home();
-    home.set("name", req.body.nameHome );
-    home.set("users", [ Parse.User.current().id ] );
-
-    home.save(null, {
-    success: function(home) {
-      // Execute any logic that should take place after the object is saved.
-      alert('New object created with objectId: ' + home.id);
-      res.redirect('/home-dash');
-    },
-    error: function(home, error) {
-      alert('Failed to create new object, with error code: ' + error.message);
-    }
-  });
-});
-var Home = Parse.Object.extend("Home");
-
-//Add user to home
+// Add user to home
 app.post('/addUser', function(req, res){
-
-  Parse.Cloud.useMasterKey();
-  var query = new Parse.Query(Parse.User); // Create a new query
-  query.equalTo( 'username', req.body.username);
-  query.first().then(function(user){
-
-    var queryHome = new Parse.Query(Home);
-    queryHome.equalTo( 'objectId', req.body.homeID);
-    queryHome.first().then(function(home){
-      home.add("users", user.id);
-      return home.save();
-    }).then(function(){ res.redirect('home-dash'); });
-
+  var user = {userName: req.body.userName, balance: 0};
+  var query = new Parse.Query(Homes);
+  query.equalTo('objectId', req.body.homeId);
+  query.first().then(function(home){
+    home.addUnique('user', user);
+    home.save();
+    res.redirect('home-dash');
   });
+});
 
 
+
+//Profile Nav Page
+//Adam did this, hes pretty drunk, might want to double check
+app.get('/profile', function(req, res) {
+	var homeNames = [];
+	var user_query = new Parse.Query(Parse.User);
+
+	user_query.find({
+		success: function(results) {
+      alert("Successfully retrieved " + results.length + " homes.");
+      for (var i = 0; i < results.length; i++) {
+      	var object = results[i];
+      	alert(object.id + '  ' + object.get('username'));
+      }
+      res.render('profile', {profiles: results});
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
 });
 
 // Make item name:
@@ -280,10 +244,6 @@ app.post('/make_item', function(req, res){
 	grocery.set("itemName", req.body.itemName);
 	grocery.set("itemCost", req.body.itemCost);
 	grocery.set("itemNotes", req.body.itemNotes);
-//	grocery.set("option1", option1);
-//	grocery.set("option2", option2);
-//	grocery.set("option3", option3);
-
 
 	grocery.save(null, {
 		success: function(grocery) {
@@ -301,7 +261,7 @@ app.post('/make_item', function(req, res){
 app.post('/delete_item', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
-	
+
 	grocery_query.get( req.body.ident, {
 		success: function(this_grocery){
 			this_grocery.destroy({
@@ -311,7 +271,7 @@ app.post('/delete_item', function(req, res){
 				error: function(grocery_query, error){
 				}
 			});
-		},	
+		},
 		error: function(grocery_query, error) {
 		alert('Nope, didnt work');
 		}
@@ -322,7 +282,7 @@ app.post('/delete_item', function(req, res){
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
-	
+
 	grocery_query.get( req.body.claim[0], {
 		success: function(this_grocery){
 			var cost = this_grocery.get("itemCost");
@@ -332,7 +292,7 @@ app.post('/adj_acnt', function(req, res){
 
 				var User = Parse.Object.extend("User");
 				var user_query = new Parse.Query(User);
-				
+
 				user_query.get( member_id, {
 					success: function(this_user){
 						var current_balance = this_user.get("balance");
@@ -342,12 +302,12 @@ app.post('/adj_acnt', function(req, res){
 					}
 				});
 			};
-			
+
 			var User = Parse.Object.extend("User");
 			var user_query = new Parse.Query(User);
-			
-			
-			
+
+
+
 			user_query.get( req.body.claim[1], {
 				success: function(this_user){
 					var current_balance = this_user.get("balance");
@@ -356,8 +316,8 @@ app.post('/adj_acnt', function(req, res){
 				error: function(user_query, error) {
 				}
 			});
-		
-			
+
+
 			this_grocery.destroy({
 				success: function(grocery_query){
 					res.redirect('/grocery_list');
@@ -365,12 +325,13 @@ app.post('/adj_acnt', function(req, res){
 				error: function(grocery_query, error){
 				}
 			});
-			
+
 		},
 		error: function(grocery_query, error){
 		}
 	});
 });
+<<<<<<< HEAD
 */	
 	/*	
 			this_grocery.destroy({
@@ -417,6 +378,9 @@ app.post('/adj_acnt', function(req, res){
 //   // POST http://example.parseapp.com/test (with request body "message=hello")
 //   res.send(req.body.message);
 // });
+=======
+
+>>>>>>> origin/master
 
 // Attach the Express app to Cloud Code.
 app.listen();

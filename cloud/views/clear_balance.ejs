@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!-- 	Draft 1 of Mhacks IV project
 		Adam Karabatakis
@@ -14,7 +15,7 @@
         <script src = "../js/bootstrap.js"></script>
 
 </head>
-	
+
 	<!-- ============ START OF BODY ========== -->
 
 	<body>
@@ -54,27 +55,28 @@
 
 		<div class="list-group col-md-5">
 
-			<a href="#" class="list-group-item"> 
-				<h4> asdfsaf </h4> 
-				<p> sdfs </p> 
+			<a href="#" class="list-group-item">
+				<h4> asdfsaf </h4>
+				<p> sdfs </p>
 				<p> sdfsdf </p>
 			</a>
-			<a href="#" class="list-group-item"> 
-				<h4> asdfsaf </h4> 
-				<p> sdfs </p> 
+			<a href="#" class="list-group-item">
+				<h4> asdfsaf </h4>
+				<p> sdfs </p>
 				<p> sdfsdf </p>
 			</a>
-			<a href="#" class="list-group-item"> 
-				<h4> asdfsaf </h4> 
-				<p> sdfs </p> 
+			<a href="#" class="list-group-item">
+				<h4> asdfsaf </h4>
+				<p> sdfs </p>
 				<p> sdfsdf </p>
 			</a>
-			
+
 		</div>
-		
-		
-		
+
+
+
 				<div class="col-md-2"></div>
+<<<<<<< HEAD
 		<div class="list-group col-md-3">
 		
 			<div class="form-group">
@@ -87,6 +89,26 @@
 				<button class="btn btn-primary" onclick="Parse.Cloud.httpRequest()" type="submit">Submit</button>
 			
 			</div>
+=======
+		<div class="list-group col-md-5">
+
+		<div class="form-group">
+			<label for = "user_id" class="col-lg-2 control-label">Venmo User ID</label>
+				<div class="col-lg-10">
+			<input name="user_id" type = "text" class="form-control"></input>
+			<label for = "note" class="col-lg-2 control-label">Note about payment</label>
+				<div class="col-lg-10">
+			<input name="note" type = "text" class="form-control"></input>
+		</div>
+
+		<div class="form-group">
+			<label for = "amount" class="col-lg-2 control-label">Payment Amount</label>
+				<div class="col-lg-10">
+			<input name="amount" type = "text" class="form-control"></input>
+		</div>
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+>>>>>>> origin/master
 		</div>
 
 
@@ -100,7 +122,7 @@
   				user_id : 'user_id',
   				note : 'note',
   				amount : 'amount',
-  				
+
 			},
 			success: function(httpResponse) {
 				console.log(httpResponse.text);
@@ -111,44 +133,46 @@
 });
 
 
-
-</script>
-
-		<!-- <script>
-		var highest() {
-			var highPerson = 0;
-			var high = 0;
-			for( var i = 1; i < House.length; ++i ) {
-				if ( House[i][3] > high ) {
-					high = House[i][3];
-					highPerson = i;
-				}
-			}
-			return highPerson;
-		}
-		
-		var lowest() {
-			var lowPerson = 0;
-			var low = 0;
-			for( var i = 1; i < House.length; ++i ){
-				if ( House[i][3] < low ) {
-					low = House[i][3];
-					lowPerson = i;
-				}
-			}
-			return lowPerson;
-		}
-		
-		while( highest() > 0 & lowest() < 0 ) {
-			var payer = highest();
-			var payee = lowest();
-			var amnt = min( highest(), absolute( lowest() ) );
-			House[ payer ][3] = House[ payer ][3] - amnt;
-			House[ payee ][3] = House[ payee ][3] + amnt;
-			
-			
-		}
-		</script> -->
+//
+// </script>
+//
+// 		<div class="list-group col-md-5">
+//
+// 		 <script>
+//
+// 		var highest() {
+// 			var highPerson = 0;
+// 			var high = 0;
+// 			for( var i = 1; i < House.length; ++i ) {
+// 				if ( House[i][3] > high ) {
+// 					high = House[i][3];
+// 					highPerson = i;
+// 				}
+// 			}
+// 			return highPerson;
+// 		}
+//
+// 		var lowest() {
+// 			var lowPerson = 0;
+// 			var low = 0;
+// 			for( var i = 1; i < House.length; ++i ){
+// 				if ( House[i][3] < low ) {
+// 					low = House[i][3];
+// 					lowPerson = i;
+// 				}
+// 			}
+// 			return lowPerson;
+// 		}
+//
+// 		while( highest() > 0 & lowest() < 0 ) {
+// 			var payer = highest();
+// 			var payee = lowest();
+// 			var amnt = min( highest(), absolute( lowest() ) );
+// 			House[ payer ][3] = House[ payer ][3] - amnt;
+// 			House[ payee ][3] = House[ payee ][3] + amnt;
+// 		}
+// 		</script>
+// 		
 	</body>
 
 </html>

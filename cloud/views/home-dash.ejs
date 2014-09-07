@@ -1,32 +1,27 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Homes</title>
+    <title>My Smials</title>
   </head>
   <body>
-    <h1>You are signed in as <%= myUsername %></h1>
+    <h1>You are signed in as <%= me %></h1>
     <a href="logout"> logout</a>
 
     <form method="post" action="/createHome">
-    <input name="nameHome" class="span2" type="text" placeholder="Name your new home">
+    <input name="name" class="span2" type="text" placeholder="Name your new home"></input>
     <button type="submit" class="btn">Create a new home</button>
     </form>
 
     <ul>
-    <% for(var i=0; i<homeNames.length; i++) { %>
+    <% for(var i=0; i < homes.length; i++) { %>
         <li>
             <div>
-              <a href='home/<%= homeNames[i] %>'>
-                <%= homeNames[i] %>
+              <a href="home/<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" >
+                <span><%= JSON.parse(JSON.stringify(homes[i])).name %></span>
               </a>
-
-              <% for(var j=0; j<usernames.length; j++) { %>
-                <%= usernames[j] %>
-              <% } %>
               <form method="post" action="/addUser">
-              <input name="username" class="span2" type="text" placeholder="user_name">
-              <input  name="homeID" value='<%= homeID[i] %>' >
+              <input name="userName" class="span2" type="text" placeholder="user_name"></input>
+              <input  name="homeId" value="<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" ></input>
               <button type="submit" class="btn">Add User</button>
               </form>
             </div>
