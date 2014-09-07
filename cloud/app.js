@@ -62,6 +62,7 @@ app.get('/about-adam', function(req,res) {
   res.render('about-adam');
 });
 
+
 //------------------------------------------------------------------------------
 
 //Root
@@ -69,6 +70,21 @@ app.get('/', function(req, res) {
   if (Parse.User.current()) { res.redirect('home-dash'); }
   else { res.render('login'); }
 });
+
+
+
+//--------------------------------------------------------------
+
+app.get('/clear_balance', function(req, res) {
+	res.render('clear_balance');
+});
+
+app.get('/house_nav', function(req, res) {
+	res.render('house_nav');
+});
+
+
+
 
 
 //--------------------------Home Creation-------------------------------------
