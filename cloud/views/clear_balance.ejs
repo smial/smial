@@ -45,120 +45,46 @@
 		</div>
 
 		<div class="list-group col-md-5">
-
-		<% for(var i=1; i<groceryNames.length; i+= 2) { %>
-			<a href="#" class="list-group-item">
-				<h4><%= groceryNames[i] %></h4>
-				<p><%= groceryCosts[i] %></p>
-				<p><%= groceryNotes[i] %></p>
-
-				<div class="btn-toolbar">
-					<form method="post" action="/adj_acnt" class="form-horizontal"> 
-					<button class="btn btn-success pull-left" > Claim </button>
-					<input name="claim" type = "hidden" class="form-control" value= <%= {groceryIDs[i], Parse.User.current().getUsername()} %> ></input> 
-					</form> 
-					
-					<form method="post" action="/delete_item" class="form-horizontal"> 
-					<button class="btn btn-danger pull-right" > Cancel </button>
-					<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
-					</form> 
-				</div>
-
+		
+		<script>
+		var highest() {
+			var highPerson = 0;
+			var high = 0;
+			for( var i = 1; i < House.length; ++i ) {
+				if ( House[i][3] > high ) {
+					high = House[i][3];
+					highPerson = i;
+				}
+			}
+			return highPerson;
+		}
+		
+		var lowest() {
+			var lowPerson = 0;
+			var low = 0;
+			for( var i = 1; i < House.length; ++i ){
+				if ( House[i][3] < low ) {
+					low = House[i][3];
+					lowPerson = i;
+				}
+			}
+			return lowPerson;
+		}
+		
+		while( highest() > 0 & lowest() < 0 ) {
+			var payer = highest();
+			var payee = lowest();
+			var amnt = min( highest(), absolute( lowest() ) );
+			House[ payer ][3] = House[ payer ][3] - amnt;
+			House[ payee ][3] = House[ payee ][3] + amnt;
+			
+			<a href="#" class="list-group-item"> 
+				<h4> <%= House[payer][2] %> </h4> 
+				<p> <%= House[payee][2] %></p> 
+				<p> $<%= amnt %></p>
 			</a>
-			 <% } %>
-
-		</div>
-
-		<div class="list-group col-md-5">
-			<a href="#" class="list-group-item">
-				<h4>Parsnips</h4>
-				<p> $4.99 </p>
-				<p> Organic Parsnips only please! </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Carrots</h4>
-				<p> $2.39 </p>
-				<p> No notes </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Toilet Paper</h4>
-				<p> $4.99 </p>
-				<p> Double plied only, I'm sensitive </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-			<a href="#" class="list-group-item">
-				<h4>Parsnips</h4>
-				<p> $8.00 </p>
-				<p> 8-10 range is fine </p>
-				<button class="btn btn-success"> Claim </button>
-				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
-				<button class="btn btn-danger pull-right"> Cancel </button>
-			</a>
-
-		</div>
-
-		<div class="modal" id="edit" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form class="form-horizontal">
-						<div class="modal-header">
-							<h4>Request an Item</h4>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label for = "item-name" class="col-lg-2 control-label">Item</label>
-								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="item-name" placeholder="Parsnips"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for = "item-cost" class="col-lg-2 control-label">Price</label>
-								<div class="col-lg-10">
-									<input type = "text" class="form-control" id="item-cost" placeholder="$14.00"></input>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for = "item-message" class="col-lg-2 control-label">Notes</label>
-								<div class="col-lg-10">
-
-									<textarea class="form-control" rows="8" placeholder="That's a lot of parsnips"></textarea>
-
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for = "item-members" class="col-lg-2 control-label">Who's In</label>
-								<div class="col-lg-10">
-									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adam Karabatakis
-									</label>
-									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox2" value="option2" checked> Lauren Bilbo
-									</label>
-									<label class="checkbox-inline">
-									  <input type="checkbox" id="inlineCheckbox3" value="option3" checked> Chening Duker
-									</label>
-								</div>
-							</div>
-
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" type="submit">Submit</button>
-							<a class="btn btn-default" data-dismiss="modal">Close</a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		}
+		</script>
 	</body>
 
 </html>

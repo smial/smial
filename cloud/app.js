@@ -95,6 +95,10 @@ app.get('/about-Adam', function(req,res) {
 	res.render('about-Adam');
 });
 
+app.get('/clear_balance', function(req, res) {
+	res.render('clear_balance');
+});
+
 
 //Profile Nav Page
 //Adam did this, hes pretty drunk, might want to double check
@@ -309,7 +313,7 @@ app.post('/delete_item', function(req, res){
 		}
 	});
 });
-var items = []; var people = []; var amount_receiving = [];
+
 
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
