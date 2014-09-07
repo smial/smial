@@ -304,7 +304,8 @@ app.post('/delete_item', function(req, res){
 				}
 			});
 		},	
-		error: function(grocery_query, error) {
+		error: function(this_grocery, error) {
+		
 		alert('Nope, didnt work');
 		}
 	});
