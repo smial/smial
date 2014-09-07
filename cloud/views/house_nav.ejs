@@ -82,6 +82,8 @@
 				  // CREATE A REFERENCE TO FIREBASE
 				  var messagesRef = new Firebase('https://faup3jrmabj.firebaseio-demo.com/');
 
+				  var user = Parse.User.current();
+				  user.getUsername();
 				  // REGISTER DOM ELEMENTS
 				  var messageField = $('#messageInput');
 				  var nameField = $('#nameInput');
@@ -142,7 +144,27 @@
 
 
 
-		<div class="modal" id="add" role="dialog">
+		<div class="modal" id="claim" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="adj_acnt" class="form-horizontal">
+
+						<div class="modal-header">
+							<h4>Confirm Purchase</h4>
+						</div>
+
+					
+
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Submit</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+				<div class="modal" id="add" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<form method="post" action="/make_item" class="form-horizontal">
