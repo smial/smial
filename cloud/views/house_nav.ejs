@@ -40,6 +40,7 @@
 			</div>
 		</div>
 
+		<!--
 		<div class="container">
 			<div class="panel panel-default panel-body">
 				<h1> 1028 Packard</h1>
@@ -58,6 +59,7 @@
 				</table>
 			</div>
 		</div>
+		-->
 
 		<div class="container">
 			<div class = "col-md-8">
@@ -132,39 +134,18 @@
 
 				<div class="panel panel-default panel-body text-center">
 					<h3><strong>Generate Payments</strong></h3>
-					<button type="button" class="btn btn-primary btn-lg">Create!</button>
+					<a class="btn btn-primary btn-lg" href="clear_balance">Create!</a>
 				</div>
 				<div class="panel panel-default panel-body text-center">
 					<h3><strong>See Previous Purchases</strong></h3>
-					<button type="button" class="btn btn-primary btn-lg">See Full List</button>
+					<a class="btn btn-primary btn-lg" href="profile">See Full List</a>
 				</div>
 			</div>
 		</div>
 
 
-
-
-		<div class="modal" id="claim" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form method="post" action="adj_acnt" class="form-horizontal">
-
-						<div class="modal-header">
-							<h4>Confirm Purchase</h4>
-						</div>
-
-					
-
-						<div class="modal-footer">
-							<button class="btn btn-primary" type="submit">Submit</button>
-							<a class="btn btn-default" data-dismiss="modal">Close</a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 		
-				<div class="modal" id="add" role="dialog">
+		<div class="modal" id="add" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<form method="post" action="/make_item" class="form-horizontal">

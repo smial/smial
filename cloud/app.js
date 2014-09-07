@@ -315,11 +315,11 @@ app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
 	
-	grocery_query.get( req.body.claim, {
+	grocery_query.get( req.body.claim[0], {
 		success: function(this_grocery){
 			var cost = this_grocery.get("itemCost");
 			var members = this_grocery.get("itemMembers");
-			for( int i = 0; i < members.length; i++) {
+			for( var i = 0; i < members.length; i++) {
 				var member_id = members[i]
 
 				var User = Parse.Object.extend("User");
@@ -334,6 +334,21 @@ app.post('/adj_acnt', function(req, res){
 					}
 				});
 			};
+			
+			var User = Parse.Object.extend("User");
+			var user_query = new Parse.Query(User);
+			
+			
+			
+			user_query.get( req.body.claim[1], {
+				success: function(this_user){
+					var current_balance = this_user.get("balance");
+					this_user.set("balance", current_balance + cost);
+				},
+				error: function(user_query, error) {
+				}
+			});
+		
 			
 			this_grocery.destroy({
 				success: function(grocery_query){
