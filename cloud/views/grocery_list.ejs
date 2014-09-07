@@ -76,7 +76,6 @@
 				<button class="btn btn-success"> Claim </button>
 				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
 				<form method="post" action="/delete_item" class="form-horizontal pull-right"> 
-		<!--	<button class="btn btn-danger pull-right" onclick="myFunction('groceryIDs[i]')" data-button= "groceryIDs[i]"> Cancel </button> -->
 				<button class="btn btn-danger pull-right"> Cancel </button>
 				<input name="ident" type = "hidden" class="form-control" value=groceryIDs[i] ></input> 
 				</form> 
@@ -88,14 +87,17 @@
 
 		<div class="col-md-2"></div>
 		<div class="list-group col-md-5">
-		<% for(var i=groceryNames.length/2; i<groceryNames.length; i++) { %>
+		<% for(var i=groceryNames.length/2; i<=groceryNames.length-1; i++) { %>
 			<a href="#" class="list-group-item">
 				<h4><%= groceryNames[i] %></h4>
 				<p><%= groceryCosts[i] %></p>
 				<p><%= groceryNotes[i] %></p>
 				<button class="btn btn-success"> Claim </button>
 				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<form method="post" action="/delete_item" class="form-horizontal pull-right"> 
 				<button class="btn btn-danger pull-right"> Cancel </button>
+				</form> 
+
 			</a>
 			 <% } %>
 
