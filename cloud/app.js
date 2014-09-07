@@ -23,16 +23,16 @@ app.get('/about', function(req, res) {
     res.render('about');
 });
 
-app.get('/about-Lauren', function(req, res) {
-  res.render('about-Lauren');
+app.get('/about-lauren', function(req, res) {
+  res.render('about-lauren');
 });
 
-app.get('/about-Chening', function(req,res) {
-  res.render('about-Chening');
+app.get('/about-chening', function(req,res) {
+  res.render('about-chening');
 });
 
-app.get('/about-Adam', function(req,res) {
-  res.render('about-Adam');
+app.get('/about-adam', function(req,res) {
+  res.render('about-adam');
 });
 
 //--------------------------------------------------------------
@@ -50,7 +50,8 @@ app.get('/', function(req, res) {
 //Homes look like this:
 
 //Class = Homes
-//Instance = ObjectId: XXXX, user: {userID: XXX, userName: XXX, balance: 444 }
+//Instance = ObjectId: XXXX, user: {userName: XXX, balance: 444 }
+////It is worth noting username is used as a unique id
 
 var Homes = Parse.Object.extend("Homes");
 
@@ -72,17 +73,16 @@ app.get('/home-dash', function(req, res) {
 
 //Create a home
 app.post('/createHome', function(req, res){
-  var user = { userId: '', userName: '', balance: 0};
+  var user = {userName: '', balance: 0};
   var home = new Homes();
   home.set('name', req.body.name);
   home.save();
 
   Parse.User.current().fetch().then(function(_me){
-    user.userID = _me.get('userId');
-    user.userName = _me.get('userName');
+    user.userName = _me.get('username');
     user.balance = 0;
   }.bind(this)).then(function(){
-    home.set('user', user );
+    home.set('user', [user] );
     home.save();
     res.redirect('home-dash');
   }.bind(this));
@@ -95,7 +95,19 @@ app.post('/updateHome', function(req, res){
   var query = new Parse.Query(Homes);
   query.include('user');
   query.get(id).then(function(home){
-    home.set('user', user);
+    home.set('user', [user] );
+    home.save();
+    res.redirect('home-dash');
+  });
+});
+
+// Add user to home
+app.post('/addUser', function(req, res){
+  var user = { userName: req.body.userName, balance: 0};
+  var query = new Parse.Query(Homes);
+  query.equalTo('objectId', req.body.homeId);
+  query.first().then(function(home){
+    home.addUnique('user', user );
     home.save();
     res.redirect('home-dash');
   });

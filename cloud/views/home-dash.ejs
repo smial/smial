@@ -21,8 +21,8 @@
                 <span><%= JSON.parse(JSON.stringify(homes[i])).name %></span>
               </a>
               <form method="post" action="/addUser">
-              <input name="username" class="span2" type="text" placeholder="user_name">
-              <input  name="homeID" value="<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" >
+              <input name="userName" class="span2" type="text" placeholder="user_name"></input>
+              <input  name="homeId" value="<%= JSON.parse(JSON.stringify(homes[i])).objectId %>" ></input>
               <button type="submit" class="btn">Add User</button>
               </form>
             </div>
