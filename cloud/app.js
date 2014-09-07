@@ -290,11 +290,10 @@ app.post('/make_item', function(req, res){
 });
 
 app.post('/delete_item', function(req, res){
-
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
 	
-	grocery_query.get(req.body.ident, {
+	grocery_query.get( req.body.ident, {
 		success: function(this_grocery){
 			this_grocery.destroy({
 				success: function(grocery_query){
