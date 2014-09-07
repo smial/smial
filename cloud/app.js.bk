@@ -1,3 +1,6 @@
+sayhi: function(){
+  console.log("I hate this system");
+}
 //initialize Express in Cloud Code
 //Require cookie and redirect modules
 var express = require('express');
@@ -15,6 +18,83 @@ app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 
 
 
+//Root
+app.get('/', function(req, res) {
+  if (Parse.User.current()) {
+    res.redirect('/home-dash');
+  }
+  else {
+    res.render('login', { message: 'Log in here:' });
+  }
+
+});
+
+
+//--------------------------Home Creatuion
+var Home = Parse.Object.extend("Home");
+
+//Home Dashboard
+app.get('/home-dash', function(req, res) {
+  var homeNames = [];
+  var homeID = [];
+  var user = Parse.User.current();
+  var myUsername;
+  var query = new Parse.Query(Home);
+  user.fetch().then(function(user) {
+    myUsername = user.get('username');
+  }).then(function() {
+    query.find({
+      success: function(homes) {
+        for (var i = 0; i < homes.length; i++) {
+          homeNames.push( homes[i].get('name') );
+          homeID.push( homes[i].id );
+        }
+        res.render('home-dash', {
+          homeNames: homeNames,
+          homeID: homeID,
+          myUsername: myUsername
+        });
+      },
+      error: function(error) { alert("Error: " + error.code + " " + error.message);}
+    });
+  });
+});
+
+
+//Create a home
+app.post('/createHome', function(req, res){
+  //Create an instance of a home & name it
+  var home = new Home();
+    home.set("name", req.body.nameHome );
+    home.save(null, {
+    success: function(home) {res.redirect('/home-dash');},
+    error: function(home, error) {
+      alert('Failed to create new object, with error code: ' + error.message);
+      res.redirect('/home-dash');
+    }
+  });
+});
+
+
+//Add user to home
+app.post('/addUser', function(req, res){
+
+  Parse.Cloud.useMasterKey();
+  var query = new Parse.Query(Parse.User); // Create a new query
+  query.equalTo( 'username', req.body.username);
+  query.first().then(function(user){
+    if ( typeof user.get(req.body.homeId) === "undefined" ) {
+      user.set(JSON.stringify(req.body.homeId), 0);
+      user.save();
+      console.log('YEEEEEEEEEAAAAAHHHHHH!');
+    }
+    else { console.log(user.get('username') + 'is already added'); }
+  }).then(function(){ res.redirect('home-dash'); });
+
+});
+
+
+
 //-------------------------------Top Bar -----------------------
 
 //About pages
@@ -24,80 +104,15 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/about-Lauren', function(req, res) {
-  res.render('about-Lauren');
+	res.render('about-Lauren');
 });
 
 app.get('/about-Chening', function(req,res) {
-  res.render('about-Chening');
+	res.render('about-Chening');
 });
 
 app.get('/about-Adam', function(req,res) {
-  res.render('about-Adam');
-});
-
-//--------------------------------------------------------------
-
-
-
-//Root
-app.get('/', function(req, res) {
-  if (Parse.User.current()) { res.redirect('home-dash'); }
-  else { res.render('login'); }
-});
-
-
-//--------------------------Home Creation
-//Homes look like this:
-
-//Class = Homes
-//Instance = ObjectId: XXXX, user: {userID: XXX, userName: XXX, balance: 444 }
-
-var Homes = Parse.Object.extend("Homes");
-
-//Home Dashboard
-app.get('/home-dash', function(req, res) {
-
-  var me;
-  var homes;
-  Parse.User.current().fetch().then(function(_me){ me = _me.get('username');}.bind(this)).then(function(){
-    var query = new Parse.Query(Homes);
-    query.find().then(function(result){
-      homes = result;
-    }.bind(this)).then(function(){
-      res.render('home-dash', { homes: homes, me: me });
-    }.bind(this));
-  }.bind(this));
-
-});
-
-//Create a home
-app.post('/createHome', function(req, res){
-  var user = { userId: '', userName: '', balance: 0};
-  var Homes = new Parse.Object.extend("Homes");
-  var home = new Home();
-  home.set('name', req.body.name);
-  home.save();
-
-  Parse.User.current().fetch().then(function(_me){
-    user.userID = _me.get('userId');
-    user.userName = _me.get('userName');
-    user.balance = 0;
-  }.bind(this)).then(function(){
-    home.set('user', user );
-    home.save();
-  }.bind(this));
-});
-
-//Update a home
-app.post('/updateHome', function(req, res){
-  var user = req.body.home.user;
-  var id = req.body.home.ObjectId;
-  var query = new Parse.Query(Homes);
-  query.include('user');
-  query.get(id).then(function(home){
-    home.set('user', user);
-    home.save();
-  });
+	res.render('about-Adam');
 });
 
 
