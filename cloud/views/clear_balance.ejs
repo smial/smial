@@ -97,14 +97,15 @@
 			method: 'POST',
 			url: 'http://api.venmo.com/v1/payments',
  			params: {
-  				access_token : 'access_token',
-  				user_id : 'user_id',
-  				note : 'note',
-  				amount : 'amount',
+  				access_token : access_token,
+  				user_id : user_id,
+  				note : note,
+  				amount : amount,
 
 			},
 			success: function(httpResponse) {
 				console.log(httpResponse.text);
+				res.redirect('/house_nav');
 			},
 			error: function(httpResponse) {
 				console.error('Request failed with response code ' + httpResponse.status);
