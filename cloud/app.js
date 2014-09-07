@@ -68,6 +68,28 @@ app.get('/clear_balance', function(req, res) {
 	res.render('clear_balance');
 });
 
+/*
+//Profile Nav Page
+//Adam did this, hes pretty drunk, might want to double check
+app.get('/profile', function(req, res) {
+	var homeNames = [];
+	var user_query = new Parse.Query(Parse.User);
+
+	user_query.find({
+		success: function(results) {
+      alert("Successfully retrieved " + results.length + " homes.");
+      for (var i = 0; i < results.length; i++) {
+      	var object = results[i];
+      	alert(object.id + '  ' + object.get('username'));
+      }
+      res.render('profile', {profiles: results});
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+});
+*/
 
 
 //Root
@@ -253,7 +275,7 @@ app.post('/delete_item', function(req, res){
 	});
 });
 
-
+/*
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
@@ -306,6 +328,52 @@ app.post('/adj_acnt', function(req, res){
 		}
 	});
 });
+*/	
+	/*	
+			this_grocery.destroy({
+				success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+		},	
+		error: function(grocery_query, error) {
+		alert('Nope, didnt work');
+		}
+	});
+});
+*/
+
+//function myFunction(ident){
+//	var Grocery = Parse.Object.extend("Grocery");
+//	var grocery_query = new Parse.Query(Grocery);
+	
+//	grocery_query(ident, {
+//		success: grocery_query.destroy({
+//			success: function(grocery_query){
+//			},
+//			error: function(grocery_query, error){
+//			}
+//			}),
+//		error: function(grocery, error) {
+//		alert('Nope, didnt work');
+//		}
+//});
+//}
+
+
+// // Example reading from the request query string of an HTTP get request.
+// app.get('/test', function(req, res) {
+//   // GET http://example.parseapp.com/test?message=hello
+//   res.send(req.query.message);
+// });
+
+// // Example reading from the request body of an HTTP post request.
+// app.post('/test', function(req, res) {
+//   // POST http://example.parseapp.com/test (with request body "message=hello")
+//   res.send(req.body.message);
+// });
 
 
 // Attach the Express app to Cloud Code.
