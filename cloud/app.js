@@ -372,21 +372,6 @@ app.post('/adj_acnt', function(req, res){
 	});
 });
 		
-	/*	
-			this_grocery.destroy({
-				success: function(grocery_query){
-					res.redirect('/grocery_list');
-				},
-				error: function(grocery_query, error){
-				}
-			});
-		},	
-		error: function(grocery_query, error) {
-		alert('Nope, didnt work');
-		}
-	});
-});
-*/
 
 //function myFunction(ident){
 //	var Grocery = Parse.Object.extend("Grocery");
