@@ -103,7 +103,7 @@ app.get('/clear_balance', function(req, res) {
 	res.render('clear_balance');
 });
 
-
+/*
 //Profile Nav Page
 //Adam did this, hes pretty drunk, might want to double check
 app.get('/profile', function(req, res) {
@@ -124,7 +124,7 @@ app.get('/profile', function(req, res) {
     }
   });
 });
-
+*/
 
 //Home Nav Page
 app.get('/house_nav', function(req, res){
@@ -318,7 +318,7 @@ app.post('/delete_item', function(req, res){
 	});
 });
 
-
+/*
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
@@ -371,7 +371,7 @@ app.post('/adj_acnt', function(req, res){
 		}
 	});
 });
-		
+*/	
 	/*	
 			this_grocery.destroy({
 				success: function(grocery_query){
