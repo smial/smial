@@ -38,10 +38,7 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 		<div class="container">
 			<div class="panel panel-default panel-body text-center">
 				<h1> Payment Schedule</h1>
@@ -70,17 +67,21 @@
 
 
 
-				<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		
 		<div class="list-group col-md-3">
 		
 			<div class="form-group">
 				<label for = "user_id" class=" control-label">Venmo User ID</label>
 				<input name="user_id" type = "text" class="form-control"></input>
+				
 				<label for = "note" class="control-label">Note about payment</label>
 				<input name="note" type = "text" class="form-control"></input>
+				
 				<label for = "amount" class="control-label">Payment Amount</label>
 				<input name="amount" type = "text" class="form-control"></input>
-				<button class="btn btn-primary" onclick="Parse.Cloud.httpRequest()" type="submit">Submit</button>
+				
+				<button class="btn btn-primary" type="submit">Submit</button>
 			
 			</div>
 		</div>
@@ -89,13 +90,15 @@
 
 
 		<script>
-
 		Parse.Cloud.httpRequest({
 			method: 'POST',
 			url: 'http://api.venmo.com/v1/payments',
- 			body: {
-  			title: 'Vote for Pedro',
-			body: 'If you vote for Pedro, your wildest dreams will come true'
+ 			params: {
+  				access_token : '',
+  				user_id : 'user_id',
+  				note : 'note',
+  				amount : 'amount',
+
 			},
 			success: function(httpResponse) {
 				console.log(httpResponse.text);
@@ -145,62 +148,9 @@
 // 			House[ payee ][3] = House[ payee ][3] + amnt;
 // 		}
 // 		</script>
-<<<<<<< HEAD
 	</div>
 // 		
 
-=======
-//
-
-
-		<div class="container">
-			<div class="panel panel-default panel-body text-center">
-				<h1> Payment Schedule</h1>
-			</div>
-		</div>
-
-		<div class="list-group col-md-5">
-
-		<script>
-		var highest() {
-			var highPerson = 0;
-			var high = 0;
-			for( var i = 1; i < House.length; ++i ) {
-				if ( House[i][3] > high ) {
-					high = House[i][3];
-					highPerson = i;
-				}
-			}
-			return highPerson;
-		}
-
-		var lowest() {
-			var lowPerson = 0;
-			var low = 0;
-			for( var i = 1; i < House.length; ++i ){
-				if ( House[i][3] < low ) {
-					low = House[i][3];
-					lowPerson = i;
-				}
-			}
-			return lowPerson;
-		}
-
-		while( highest() > 0 & lowest() < 0 ) {
-			var payer = highest();
-			var payee = lowest();
-			var amnt = min( highest(), absolute( lowest() ) );
-			House[ payer ][3] = House[ payer ][3] - amnt;
-			House[ payee ][3] = House[ payee ][3] + amnt;
-
-			<a href="#" class="list-group-item">
-				<h4> <%= House[payer][2] %> </h4>
-				<p> <%= House[payee][2] %></p>
-				<p> $<%= amnt %></p>
-			</a>
-		}
-		</script>
->>>>>>> origin/master
 	</body>
 
 </html>

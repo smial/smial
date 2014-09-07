@@ -68,6 +68,10 @@ app.get('/clear_balance', function(req, res) {
 	res.render('clear_balance');
 });
 
+app.get('/house_nav', function(req, res) {
+	res.render('house_nav');
+});
+
 
 //Root
 app.get('/', function(req, res) {
