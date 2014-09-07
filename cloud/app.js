@@ -308,7 +308,7 @@ app.post('/delete_item', function(req, res){
 		}
 	});
 });
-
+/*
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
 	var grocery_query = new Parse.Query(Grocery);
@@ -342,6 +342,7 @@ app.post('/adj_acnt', function(req, res){
 		}
 	});
 });
+*/
 		
 	/*	
 			this_grocery.destroy({
