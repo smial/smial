@@ -73,6 +73,7 @@
 				<h4><%= groceryNames[i] %></h4>
 				<p><%= groceryCosts[i] %></p>
 				<p><%= groceryNotes[i] %></p>
+<<<<<<< HEAD
 				<div class="btn-toolbar">
 					<form method="post" action="/adj_acnt" class="form-horizontal"> 
 					<button class="btn btn-success pull-left" > Claim </button>
@@ -84,6 +85,14 @@
 					<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
 					</form> 
 				</div>
+=======
+				<button class="btn btn-success"> Claim </button>
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<form method="post" action="/delete_item" class="form-horizontal pull-right"> 
+				<button class="btn btn-danger pull-right" > Cancel </button>
+				<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
+				</form> 
+>>>>>>> 04a8ccc098bdde8bc8df37fc6969631b7e86231b
 			</a>
 			 <% } %>
 

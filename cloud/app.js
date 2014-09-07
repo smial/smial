@@ -276,6 +276,7 @@ app.post('/make_item', function(req, res){
 //	grocery.set("option2", option2);
 //	grocery.set("option3", option3);
 
+
 	grocery.save(null, {
 		success: function(grocery) {
   		alert('New grocery created with objectId: ' + grocery.id);
@@ -302,12 +303,61 @@ app.post('/delete_item', function(req, res){
 				}
 			});
 		},	
-		error: function(this_grocery, error) {
-		
+		error: function(grocery_query, error) {
 		alert('Nope, didnt work');
 		}
 	});
 });
+
+app.post('/adj_acnt', function(req, res){
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
+	
+	grocery_query.get( req.body.claim, {
+		success: function(this_grocery){
+			var cost = this_grocery.get("itemCost");
+			var members = this_grocery.get("itemMembers");
+			for( int i = 0; i < members.length; i++) {
+				var member_id = members[i]
+
+				var User = Parse.Object.extend("User");
+				var user_query = new Parse.Query(User);
+				
+				user_query.get( member_id, {
+					success: function(this_user){
+						this_user.set("balance", balance - (cost / members.length)
+			
+			//---Do stuff here--//
+			
+			this_grocery.destroy({
+				success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+		},	
+		error: function(grocery_query, error) {
+		alert('Nope, didnt work');
+		}
+	});
+});
+		
+	/*	
+			this_grocery.destroy({
+				success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+		},	
+		error: function(grocery_query, error) {
+		alert('Nope, didnt work');
+		}
+	});
+});
+*/
 
 //function myFunction(ident){
 //	var Grocery = Parse.Object.extend("Grocery");
