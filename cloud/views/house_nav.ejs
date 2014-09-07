@@ -6,7 +6,7 @@
 -->
 
 <head>
-		<title> Smial </title>
+		<title> <%= JSON.parse(JSON.stringify(home)).name %> </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href = "../css/bootstrap.min.css" rel = "stylesheet">
     <link href = "../css/styles.css" rel = "stylesheet">
@@ -22,7 +22,7 @@
 	<body>
 		<div class = "navbar navbar-inverse navbar-fixed-top">
 			<div class = "container">
-				<a href = "#" class = "navbar-brand"> Smial </a>
+				<a href = "#" class = "navbar-brand"><%= JSON.parse(JSON.stringify(home)).name %></a>
 
 				<button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
 					<span class="icon-bar"></span>
@@ -32,7 +32,7 @@
 
 				<div class = "collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">My House</a></li>
+						<li><a href="#"><%= JSON.parse(JSON.stringify(home)).name %></a></li>
 						<li><a href="about">About</a></li>
 					</ul>
 				</div>
@@ -43,11 +43,11 @@
 			<div class = "col-md-8">
 				<!-- CHAT MARKUP -->
 			<div class="example-chat l-demo-container">
-				  <header>Firebase Chat Demo</header>
+				  <header>The <%= JSON.parse(JSON.stringify(home)).name %> Bible </header>
 
 				  <div class='example-chat-toolbar'>
 					<label for="nameInput">Username:</label>
-					<input type='text' id='nameInput' placeholder= 'username'>
+					<input type='text' id='nameInput'  value="<%= me %>"></input>
 				  </div>
 
 				  <ul id='example-messages' class="example-chat-messages"></ul>
@@ -116,7 +116,7 @@
 		</div>
 
 
-		
+
 		<div class="modal" id="add" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">

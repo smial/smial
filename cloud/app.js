@@ -38,11 +38,11 @@ app.post('/signup', function(req, res){
 //Logout
 app.get('/logout', function(req, res) { Parse.User.logOut(); res.redirect('/'); });
 
-//-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 
 
-//-------------------------------Top Bar -----------------------
+//-------------------------------Top Bar ---------------------------------------
 
 //About pages
 //Adam did this, hes pretty drunk, might want to double check
@@ -62,6 +62,17 @@ app.get('/about-adam', function(req,res) {
   res.render('about-adam');
 });
 
+
+//------------------------------------------------------------------------------
+
+//Root
+app.get('/', function(req, res) {
+  if (Parse.User.current()) { res.redirect('home-dash'); }
+  else { res.render('login'); }
+});
+
+
+
 //--------------------------------------------------------------
 
 app.get('/clear_balance', function(req, res) {
@@ -73,11 +84,7 @@ app.get('/house_nav', function(req, res) {
 });
 
 
-//Root
-app.get('/', function(req, res) {
-  if (Parse.User.current()) { res.redirect('home-dash'); }
-  else { res.render('login'); }
-});
+
 
 
 //--------------------------Home Creation-------------------------------------
@@ -123,6 +130,63 @@ app.post('/createHome', function(req, res){
 });
 
 
+
+//Update a home
+app.post('/updateHome', function(req, res){
+  var user = req.body.home.user;
+  var id = req.body.home.ObjectId;
+  var query = new Parse.Query(Homes);
+  query.include('user');
+  query.get(id).then(function(home){
+    home.set('user', [user] );
+    home.save();
+    res.redirect('home-dash');
+  });
+});
+
+// Add user to home
+app.post('/addUser', function(req, res){
+  var user = {userName: req.body.userName, balance: 0};
+  var query = new Parse.Query(Homes);
+  query.equalTo('objectId', req.body.homeId);
+  query.first().then(function(home){
+    home.addUnique('user', user);
+    home.save();
+    res.redirect('home-dash');
+  });
+});
+
+//----------------------------Home Navigation-----------------------------------
+
+app.get('/home/:homeId', function(req, res) {
+  var homeId = req.params.homeId;
+  var me;
+  Parse.User.current().fetch().then(function(_me){ me = _me.get('username');}.bind(this)).then(function(){
+    var query = new Parse.Query(Homes);
+    query.equalTo('objectId', homeId);
+    query.first().then(function(_home){
+       res.render('house_nav', { home: _home, me: me });
+    }.bind(this));
+  }.bind(this));
+}.bind(this));
+
+
+
+
+//----------------------------VENMO & MONEY-------------------------------------
+
+app.get('/clear_balance', function(req, res) {
+  res.render('clear_balance');
+});
+
+
+
+
+
+
+//----------------------------GROCERIES----------------------------------------
+
+
 //Grocery List Page
 app.get('/grocery_list', function(req, res){
 	var groceryNames = [];
@@ -165,30 +229,6 @@ app.get('/grocery_list', function(req, res){
 	});
 });
 
-//Update a home
-app.post('/updateHome', function(req, res){
-  var user = req.body.home.user;
-  var id = req.body.home.ObjectId;
-  var query = new Parse.Query(Homes);
-  query.include('user');
-  query.get(id).then(function(home){
-    home.set('user', [user] );
-    home.save();
-    res.redirect('home-dash');
-  });
-});
-
-// Add user to home
-app.post('/addUser', function(req, res){
-  var user = {userName: req.body.userName, balance: 0};
-  var query = new Parse.Query(Homes);
-  query.equalTo('objectId', req.body.homeId);
-  query.first().then(function(home){
-    home.addUnique('user', user);
-    home.save();
-    res.redirect('home-dash');
-  });
-});
 
 
 // Make item name:
@@ -237,10 +277,12 @@ app.post('/delete_item', function(req, res){
 
 
 
+
+
 //function myFunction(ident){
 //	var Grocery = Parse.Object.extend("Grocery");
 //	var grocery_query = new Parse.Query(Grocery);
-	
+
 //	grocery_query(ident, {
 //		success: grocery_query.destroy({
 //			success: function(grocery_query){
