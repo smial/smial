@@ -40,20 +40,10 @@
 		</div>
 
 
-		Parse.Cloud.httpRequest({
-			method: 'POST',
-			url: 'http://api.venmo.com/v1/payments',
- 			body: {
-  			title: 'Vote for Pedro',
-			body: 'If you vote for Pedro, your wildest dreams will come true'
-			},
-			success: function(httpResponse) {
-				console.log(httpResponse.text);
-			},
-			error: function(httpResponse) {
-				console.error('Request failed with response code ' + httpResponse.status);
-  }
-});
+
+
+
+
 
 
 
@@ -65,7 +55,78 @@
 
 		<div class="list-group col-md-5">
 
+			<a href="#" class="list-group-item">
+				<h4> asdfsaf </h4>
+				<p> sdfs </p>
+				<p> sdfsdf </p>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4> asdfsaf </h4>
+				<p> sdfs </p>
+				<p> sdfsdf </p>
+			</a>
+			<a href="#" class="list-group-item">
+				<h4> asdfsaf </h4>
+				<p> sdfs </p>
+				<p> sdfsdf </p>
+			</a>
+
+		</div>
+
+
+
+				<div class="col-md-2"></div>
+		<div class="list-group col-md-5">
+
+		<div class="form-group">
+			<label for = "user_id" class="col-lg-2 control-label">Venmo User ID</label>
+				<div class="col-lg-10">
+			<input name="user_id" type = "text" class="form-control"></input>
+		</div>
+
+		<div class="form-group">
+			<label for = "note" class="col-lg-2 control-label">Note about payment</label>
+				<div class="col-lg-10">
+			<input name="note" type = "text" class="form-control"></input>
+		</div>
+
+		<div class="form-group">
+			<label for = "amount" class="col-lg-2 control-label">Payment Amount</label>
+				<div class="col-lg-10">
+			<input name="amount" type = "text" class="form-control"></input>
+		</div>
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+		</div>
+
+
+
 		<script>
+		Parse.Cloud.httpRequest({
+			method: 'POST',
+			url: 'http://api.venmo.com/v1/payments',
+ 			params: {
+  				access_token : '',
+  				user_id : 'user_id',
+  				note : 'note',
+  				amount : 'amount',
+
+			},
+			success: function(httpResponse) {
+				console.log(httpResponse.text);
+			},
+			error: function(httpResponse) {
+				console.error('Request failed with response code ' + httpResponse.status);
+  }
+});
+
+
+
+</script>
+		<div class="list-group col-md-5">
+
+		<script>
+
 		var highest() {
 			var highPerson = 0;
 			var high = 0;
@@ -96,14 +157,8 @@
 			var amnt = min( highest(), absolute( lowest() ) );
 			House[ payer ][3] = House[ payer ][3] - amnt;
 			House[ payee ][3] = House[ payee ][3] + amnt;
-
-			<a href="#" class="list-group-item">
-				<h4> <%= House[payer][2] %> </h4>
-				<p> <%= House[payee][2] %></p>
-				<p> $<%= amnt %></p>
-			</a>
 		}
-		</script>
+		</script> -->
 	</body>
 
 </html>
