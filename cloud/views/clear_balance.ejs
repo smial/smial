@@ -70,8 +70,8 @@
 		<div class="col-md-2"></div>
 		
 		<div class="list-group col-md-3">
-			<form id="payForm" action="form_action.asp">
-			<div class="form-group">
+			<form id="payForm">
+
 				<label for = "user_id" class=" control-label">Venmo User ID</label>
 				<input name="user_id" type = "text" class="form-control"></input>
 				
@@ -82,8 +82,6 @@
 				<input name="amount" type = "text" class="form-control"></input>
 				
 				<button class="btn btn-primary" type="submit" onclick="submitFn()">Submit</button>
-			
-			</div>
 			</form>
 		</div>
 
@@ -113,7 +111,8 @@
 });
 
 			function submitFn() {
-				document.Parse.Cloud.httpRequest("payForm").submit();
+				var access_token = JSON.parse(JSON.stringify(req.query)).access_token;
+				Parse.Cloud.httpRequest("payForm", access_token);
 			}
 //
 // </script>
