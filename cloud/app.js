@@ -309,7 +309,7 @@ app.post('/delete_item', function(req, res){
 		}
 	});
 });
-
+var items = []; var people = []; var amount_receiving = [];
 
 app.post('/adj_acnt', function(req, res){
 	var Grocery = Parse.Object.extend("Grocery");
