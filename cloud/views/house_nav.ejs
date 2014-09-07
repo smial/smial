@@ -39,31 +39,10 @@
 			</div>
 		</div>
 
-		<!--
-		<div class="container">
-			<div class="panel panel-default panel-body">
-				<h1> 1028 Packard</h1>
-				<table class="table table-bordered">
-					<tr>
-						<td id="member1">
-							<strong>Adam</strong> Karabatakis
-						</td>
-						<td id="member2">
-							<strong>Lauren</strong> Bilbo
-						</td>
-						<td id="member3">
-							<strong>Chening</strong> Duker
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		-->
-
 		<div class="container">
 			<div class = "col-md-8">
 				<!-- CHAT MARKUP -->
-				<div class="example-chat l-demo-container">
+			<div class="example-chat l-demo-container">
 				  <header>Firebase Chat Demo</header>
 
 				  <div class='example-chat-toolbar'>
@@ -83,8 +62,6 @@
 				  // CREATE A REFERENCE TO FIREBASE
 				  var messagesRef = new Firebase('https://faup3jrmabj.firebaseio-demo.com/');
 
-				  var user = Parse.User.current();
-				  user.getUsername();
 				  // REGISTER DOM ELEMENTS
 				  var messageField = $('#messageInput');
 				  var nameField = $('#nameInput');
@@ -134,10 +111,6 @@
 				<div class="panel panel-default panel-body text-center">
 					<h3><strong>Generate Payments</strong></h3>
 					<a class="btn btn-primary btn-lg" href="https://api.venmo.com/v1/oauth/authorize?client_id=1935&scope=make_payments">Create!</a>
-				</div>
-				<div class="panel panel-default panel-body text-center">
-					<h3><strong>See Previous Purchases</strong></h3>
-					<a class="btn btn-primary btn-lg" href="profile">See Full List</a>
 				</div>
 			</div>
 		</div>

@@ -68,29 +68,6 @@ app.get('/clear_balance', function(req, res) {
 	res.render('clear_balance');
 });
 
-/*
-//Profile Nav Page
-//Adam did this, hes pretty drunk, might want to double check
-app.get('/profile', function(req, res) {
-	var homeNames = [];
-	var user_query = new Parse.Query(Parse.User);
-
-	user_query.find({
-		success: function(results) {
-      alert("Successfully retrieved " + results.length + " homes.");
-      for (var i = 0; i < results.length; i++) {
-      	var object = results[i];
-      	alert(object.id + '  ' + object.get('username'));
-      }
-      res.render('profile', {profiles: results});
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
-});
-*/
-
 
 //Root
 app.get('/', function(req, res) {
@@ -181,6 +158,7 @@ app.get('/grocery_list', function(req, res){
     alert("Error: " + error.code + " " + error.message);
   }
 
+	});
 });
 
 //Update a home
@@ -208,28 +186,6 @@ app.post('/addUser', function(req, res){
   });
 });
 
-
-
-//Profile Nav Page
-//Adam did this, hes pretty drunk, might want to double check
-app.get('/profile', function(req, res) {
-	var homeNames = [];
-	var user_query = new Parse.Query(Parse.User);
-
-	user_query.find({
-		success: function(results) {
-      alert("Successfully retrieved " + results.length + " homes.");
-      for (var i = 0; i < results.length; i++) {
-      	var object = results[i];
-      	alert(object.id + '  ' + object.get('username'));
-      }
-      res.render('profile', {profiles: results});
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
-});
 
 // Make item name:
 app.post('/make_item', function(req, res){
@@ -275,75 +231,7 @@ app.post('/delete_item', function(req, res){
 	});
 });
 
-/*
-app.post('/adj_acnt', function(req, res){
-	var Grocery = Parse.Object.extend("Grocery");
-	var grocery_query = new Parse.Query(Grocery);
 
-	grocery_query.get( req.body.claim[0], {
-		success: function(this_grocery){
-			var cost = this_grocery.get("itemCost");
-			var members = this_grocery.get("itemMembers");
-			for( var i = 0; i < members.length; i++) {
-				var member_id = members[i]
-
-				var User = Parse.Object.extend("User");
-				var user_query = new Parse.Query(User);
-
-				user_query.get( member_id, {
-					success: function(this_user){
-						var current_balance = this_user.get("balance");
-						this_user.set("balance", current_balance - (cost / members.length) );
-					},
-					error: function(user_query, error){
-					}
-				});
-			};
-
-			var User = Parse.Object.extend("User");
-			var user_query = new Parse.Query(User);
-
-
-
-			user_query.get( req.body.claim[1], {
-				success: function(this_user){
-					var current_balance = this_user.get("balance");
-					this_user.set("balance", current_balance + cost);
-				},
-				error: function(user_query, error) {
-				}
-			});
-
-
-			this_grocery.destroy({
-				success: function(grocery_query){
-					res.redirect('/grocery_list');
-				},
-				error: function(grocery_query, error){
-				}
-			});
-
-		},
-		error: function(grocery_query, error){
-		}
-	});
-});
-*/	
-	/*	
-			this_grocery.destroy({
-				success: function(grocery_query){
-					res.redirect('/grocery_list');
-				},
-				error: function(grocery_query, error){
-				}
-			});
-		},	
-		error: function(grocery_query, error) {
-		alert('Nope, didnt work');
-		}
-	});
-});
-*/
 
 //function myFunction(ident){
 //	var Grocery = Parse.Object.extend("Grocery");

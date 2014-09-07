@@ -76,7 +76,7 @@
 				<div class="btn-toolbar">
 					<form method="post" action="/adj_acnt" class="form-horizontal"> 
 					<button class="btn btn-success pull-left" > Claim </button>
-					<input name="claim" type = "hidden" class="form-control" value= <%= {groceryIDs[i], Parse.User.current().getUsername()} %> ></input> 
+					<input name="claim" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
 					</form> 
 					
 					<form method="post" action="/delete_item" class="form-horizontal"> 
@@ -102,7 +102,7 @@
 				<div class="btn-toolbar">
 					<form method="post" action="/adj_acnt" class="form-horizontal"> 
 					<button class="btn btn-success pull-left" > Claim </button>
-					<input name="claim" type = "hidden" class="form-control" value= <%= {groceryIDs[i], Parse.User.current().getUsername()} %> ></input> 
+					<input name="claim" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
 					</form> 
 					
 					<form method="post" action="/delete_item" class="form-horizontal"> 
