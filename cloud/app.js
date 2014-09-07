@@ -68,7 +68,6 @@ app.get('/clear_balance', function(req, res) {
 	res.render('clear_balance');
 });
 
-<<<<<<< HEAD
 /*
 //Profile Nav Page
 //Adam did this, hes pretty drunk, might want to double check
@@ -91,9 +90,7 @@ app.get('/profile', function(req, res) {
   });
 });
 */
-=======
 
->>>>>>> origin/master
 
 //Root
 app.get('/', function(req, res) {
@@ -331,7 +328,6 @@ app.post('/adj_acnt', function(req, res){
 		}
 	});
 });
-<<<<<<< HEAD
 */	
 	/*	
 			this_grocery.destroy({
@@ -378,9 +374,7 @@ app.post('/adj_acnt', function(req, res){
 //   // POST http://example.parseapp.com/test (with request body "message=hello")
 //   res.send(req.body.message);
 // });
-=======
 
->>>>>>> origin/master
 
 // Attach the Express app to Cloud Code.
 app.listen();
