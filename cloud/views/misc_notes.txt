@@ -1,0 +1,74 @@
+/*
+app.post('/adj_acnt', function(req, res){
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
+
+	grocery_query.get( req.body.claim, {
+		success: function(this_grocery){
+			var cost = this_grocery.get("itemCost");
+			var members = this_grocery.get("itemMembers");
+			for( var i = 0; i < members.length; i++) {
+				var member_id = members[i]
+
+				var User = Parse.Object.extend("User");
+				var user_query = new Parse.Query(User);
+
+				user_query.get( member_id, {
+					success: function(this_user){
+						var current_balance = this_user.get("balance");
+						this_user.set("balance", current_balance - (cost / members.length) );
+					},
+					error: function(user_query, error){
+					}
+				});
+			};
+
+			var User = Parse.Object.extend("User");
+			var user_query = new Parse.Query(User);
+
+
+			user_query.get( Parse.User.current().getUsername(), {
+				success: function(this_user){
+					var current_balance = this_user.get("balance");
+					this_user.set("balance", current_balance + cost);
+				},
+				error: function(user_query, error) {
+				}
+			});
+
+
+			this_grocery.destroy({
+				success: function(grocery_query){
+					res.redirect('/grocery_list');
+				},
+				error: function(grocery_query, error){
+				}
+			});
+
+		},
+		error: function(grocery_query, error){
+		}
+	});
+});
+
+
+		<div class="list-group col-md-5">
+		<% for(var i=groceryNames.length/2; i<groceryNames.length; i++) { %>
+			<a href="#" class="list-group-item">
+				<h4><%= groceryNames[i] %></h4>
+				<p><%= groceryCosts[i] %></p>
+				<p><%= groceryNotes[i] %></p>
+				<button class="btn btn-success"> Claim </button>
+				<button class="btn btn-primary pull-center" href="#edit" data-toggle="modal"> Edit Item</button>
+				<button class="btn btn-danger pull-right"> Cancel </button>
+			</a>
+			 <% } %>
+
+		</div>
+
+			<a href="#" class="list-group-item"> 
+				<h4> <%= House[payer][2] %> </h4> 
+				<p> <%= House[payee][2] %></p> 
+				<p> $<%= amnt %></p>
+			</a>
+*/	
