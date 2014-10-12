@@ -145,25 +145,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4">
-				<% for(var i=0; i<groceryNames.length; i += 1) { %>
-					<a href="#" class="list-group-item">
-						<h4><%= groceryNames[i] %></h4>
-						<p><%= groceryCosts[i] %></p>
-						<p><%= groceryNotes[i] %></p>
-						
-						<div class="btn-toolbar">
-							<form method="post" action="/adj_acnt" class="form-horizontal"> 
-							<button class="btn btn-success pull-left" > Claim </button>
-							<input name="claim" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
-							</form> 
-							
-							<form method="post" action="/delete_item" class="form-horizontal"> 
-							<button class="btn btn-danger pull-right" > Cancel </button>
-							<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
-							</form> 
-						</div>
-					</a>
-				<% } %>
+
 			</div>
 		</div>
 	</body>
