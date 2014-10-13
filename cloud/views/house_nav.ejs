@@ -117,30 +117,14 @@
 						</div>
 					</div>
 					<div class="list-group" id="grocery">
-						<li href="#" class="list-group-item">
-							<h4>Parsnips</h4>
-							<button type="button" class="btn btn-default" id="glyph-plus">
-								<span class="glyphicon glyphicon-plus"></span> Bump
-							</button>
-						</li>
-						<li href="#" class="list-group-item">
-							<h4>Carrots</h4>
-							<button type="button" class="btn btn-default" id="glyph-plus">
-								<span class="glyphicon glyphicon-plus"></span> Bump
-							</button>
-						</li>
-						<li href="#" class="list-group-item">
-							<h4>Toilet Paper</h4>
-							<button type="button" class="btn btn-default" id="glyph-plus">
-								<span class="glyphicon glyphicon-plus"></span> Bump
-							</button>
-						</li>
-						<li href="#" class="list-group-item">
-							<h4>Parsnips</h4>
-							<button type="button" class="btn btn-default" id="glyph-plus">
-								<span class="glyphicon glyphicon-plus"></span> Bump
-							</button>
-						</li>
+						<% for(var i=0; i<groceryNames.length; i += 1) { %>
+							<li href="#" class="list-group-item">
+								<h4><%= groceryNames[i] %></h4>
+								<button type="button" class="btn btn-default" id="glyph-plus">
+									<span class="glyphicon glyphicon-plus"></span> Bump
+								</button>						
+							</li>
+						<% } %>
 					</div>
 				</div>
 			</div>
@@ -164,6 +148,7 @@
 						</div>
 					</a>
 				<% } %>
+				
 			</div>
 		</div>
 	</body>
