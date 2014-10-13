@@ -44,18 +44,12 @@
 				</div>
 			
 				<div class="list-group" id="members">
-					<a class="list-group-item" href="#" id="expand_housemate1">
-						<span class="badge">2</span>
-						House Member
-					</a>						  
-					<a class="list-group-item"  href="#" id="expand_housemate2">
-						<span class="badge">4</span>
-						House Member
-					</a>						  
-					<a class="list-group-item"  href="#" id="expand_housemate3">
-						<span class="badge">14</span>
-						House Member
-					</a>						  
+					<% for(var i=0; i < home.user.length; i += 1;) { %>
+						<a class="list-group-item" href="#">
+							<span class="badge">5</span>
+							<%= home.user[i][2] %>
+						</a>
+					<% } %>						  
 					<a class="list-group-item"  href="#" id="expand_housemate4">
 						<span class="badge">7</span>
 						House Member
@@ -116,7 +110,7 @@
 						</div>
 					</div>
 					<div class="list-group" id="grocery">
-						<% for(var i=groceryNames.length; i>0; i -= 1) { %>
+						<% for(var i=groceryNames.length - 1; i>0; i -= 1) { %>
 							<li href="#" class="list-group-item">
 								<h4><%= groceryNames[i] %></h4>
 								<button type="button" class="btn btn-default" id="glyph-plus">
