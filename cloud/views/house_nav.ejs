@@ -47,7 +47,7 @@
 					<% for(var i=0; i < home.user.length; i += 1;) { %>
 						<a class="list-group-item" href="#">
 							<span class="badge">5</span>
-							<%= home.user[i][2] %>
+							<%= home.user[i].get("userName") %>
 						</a>
 					<% } %>						  
 					<a class="list-group-item"  href="#" id="expand_housemate4">
