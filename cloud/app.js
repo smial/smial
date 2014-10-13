@@ -161,11 +161,51 @@ app.post('/addUser', function(req, res){
 app.get('/home/:homeId', function(req, res) {
   var homeId = req.params.homeId;
   var me;
+  //Copy-pasted grocery_list code to move it to front page
+  var groceryNames = [];
+	var groceryCosts = [];
+	var groceryNotes = [];
+//	var option1 = [];
+//	var option2 = [];
+//	var option3 = [];
+	var groceryIDs = [];
+	var Grocery = Parse.Object.extend("Grocery");
+	var grocery_query = new Parse.Query(Grocery);
+
+	grocery_query.find({
+	  success: function(results) {
+    alert("Successfully retrieved " + results.length + " groceries.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+    	var object = results[i];
+		groceryNames.push(object.get('itemName'));
+		groceryCosts.push(object.get('itemCost'));
+		groceryNotes.push(object.get('itemNotes'));
+	//	option1.push(object.get('option1'));
+	//	option2.push(object.get('option2'));
+	//	option3.push(object.get('option3'));
+		groceryIDs.push(object.id);
+
+    	alert(object.id + ' - ' + object.get('item_name'));
+    }
+    res.render('grocery_list', {
+    	groceryNames: groceryNames,
+    	groceryCosts: groceryCosts,
+    	groceryNotes: groceryNotes,
+    	groceryIDs: groceryIDs});
+  },
+
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+
+	});
   Parse.User.current().fetch().then(function(_me){ me = _me.get('username');}.bind(this)).then(function(){
     var query = new Parse.Query(Homes);
     query.equalTo('objectId', homeId);
     query.first().then(function(_home){
-       res.render('house_nav', { home: _home, me: me });
+       res.render('house_nav', { home: _home, me: me, groceryNames: groceryNames, groceryCosts: groceryCosts,
+    	groceryNotes: groceryNotes, groceryIDs: groceryIDs });
     }.bind(this));
   }.bind(this));
 }.bind(this));
