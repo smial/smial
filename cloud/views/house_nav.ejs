@@ -102,10 +102,10 @@
 				<div class="panel panel-default" id="edit_grocery_list">
 					<div class="panel-heading">Grocery List</div>
 					<div class="panel-body text-center">
-						<form action="/make_item">
+						<form action="/make_item" method="post">
 							<div class="form-group">
 								<label for="itemName">New Item</label>
-								<input type="text" class="form-control" id="itemName" placeholder="Parsnips">
+								<input name="itemName" type = "text" class="form-control" id="itemName" placeholder="Parsnips"></input>
 							</div>
 							<button type="submit" class="btn btn-default">Add Item</button>
 						</form>
