@@ -281,7 +281,7 @@ app.post('/make_item', function(req, res){
 		success: function(grocery) {
   		alert('New grocery created with objectId: ' + grocery.id);
       //res.redirect('/grocery_list');
-	  res.redirect('/home/:homeId');
+	  res.redirect( req.get('referer'));
 	  },
 	  error: function(grocery, error) {
   	  alert('Failed to create new object, with error code: Chening!');
