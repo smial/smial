@@ -44,21 +44,7 @@
 				</div>
 			
 				<div class="list-group" id="members">
-					<% for(var i=0; i < JSON.parse(JSON.stringify(home)).user.length ;  i += 1;) { %>
-						<a class="list-group-item" href="#">
-							<span class="badge">5</span>
-							<%= JSON.parse(JSON.stringify(home)).user[i].get("userName") %>
-						</a>
-					<% } %>		
-
-						<% for(var i=groceryNames.length - 1; i>0; i -= 1) { %>
-							<li href="#" class="list-group-item">
-								<h4><%= groceryNames[i] %></h4>
-								<button type="button" class="btn btn-default" id="glyph-plus">
-									<span class="glyphicon glyphicon-plus"></span> Bump
-								</button>						
-							</li>
-						<% } %>					
+				
 					<a class="list-group-item"  href="#" id="expand_housemate4">
 						<span class="badge">7</span>
 						House Member
