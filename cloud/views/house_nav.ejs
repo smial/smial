@@ -104,15 +104,15 @@
 					<div class="panel-body text-center">
 						<div class="input-group">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="button" id="input1" >Add Item</button>
+								<a class="btn btn-default" type="button" id="input1" action="/make_item">Add Item</a>
 							</span>
-							<input type="text" class="form-control" placeholder="Parsnips" id="input1_form">
+							<input name="itemName" type = "text" class="form-control" id="itemName" placeholder="Parsnips">
 						</div>
 					</div>
 					<div class="panel-body text-center">
 						<div class="btn-group btn-group-justified">
 							<div class="btn-group">
-								<button type="button" class="btn btn-default">See Full List</button>
+								<a type="button" class="btn btn-default" href="grocery_list">See Full List</a>
 							</div>
 						</div>
 					</div>
@@ -129,26 +129,44 @@
 				</div>
 			</div>
 			<div class="col-lg-4">
-				<% for(var i=0; i<groceryNames.length; i += 1) { %>
-					<a href="#" class="list-group-item">
-						<h4><%= groceryNames[i] %></h4>
-						<p><%= groceryCosts[i] %></p>
-						<p><%= groceryNotes[i] %></p>
-						
-						<div class="btn-toolbar">
-							<form method="post" action="/adj_acnt" class="form-horizontal"> 
-							<button class="btn btn-success pull-left" > Claim </button>
-							<input name="claim" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
-							</form> 
-							
-							<form method="post" action="/delete_item" class="form-horizontal"> 
-							<button class="btn btn-danger pull-right" > Cancel </button>
-							<input name="ident" type = "hidden" class="form-control" value= <%= groceryIDs[i] %> ></input> 
-							</form> 
-						</div>
-					</a>
-				<% } %>
-				
+				<div class="list-group">
+					<li href="#" class="list-group-item">
+						<h4>Parsnips</h4>
+						<button type="button" class="btn btn-default" id="glyph-in">
+						  <span class="glyphicon glyphicon-ok"></span> In
+						</button>
+						<button type="button" class="btn btn-default" id="glyph-out">
+						  <span class="glyphicon glyphicon-remove"></span> Out
+						</button>
+					</li>
+					<li href="#" class="list-group-item">
+						<h4>Parsnips</h4>
+						<button type="button" class="btn btn-default" id="glyph-in">
+						  <span class="glyphicon glyphicon-ok"></span> In
+						</button>
+						<button type="button" class="btn btn-default" id="glyph-out">
+						  <span class="glyphicon glyphicon-remove"></span> Out
+						</button>
+					</li>
+					<li href="#" class="list-group-item">
+						<h4>Parsnips</h4>
+						<button type="button" class="btn btn-default" id="glyph-in">
+						  <span class="glyphicon glyphicon-ok"></span> In
+						</button>
+						<button type="button" class="btn btn-default" id="glyph-out">
+						  <span class="glyphicon glyphicon-remove"></span> Out
+						</button>
+					</li>
+					<li href="#" class="list-group-item">
+						<h4>Parsnips</h4>
+						<button type="button" class="btn btn-default" id="glyph-in">
+						  <span class="glyphicon glyphicon-ok"></span> In
+						</button>
+						<button type="button" class="btn btn-default" id="glyph-out">
+						  <span class="glyphicon glyphicon-remove"></span> Out
+						</button>
+					</li>
+				</div>
 			</div>
 		</div>
 	</body>
