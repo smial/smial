@@ -44,23 +44,13 @@
 				</div>
 			
 				<div class="list-group" id="members">
-					<span> <%= JSON.stringify(home) %> </span>
-					<span> <%= JSON.parse(JSON.stringify(home)).user %></span>
-					<span> <%= JSON.parse(JSON.stringify(home)).user[0].userName %></span>
-					<% for(var i=0; i < 3; i += 1) { %>
+
+					<% for(var i=0; i <  JSON.parse(JSON.stringify(home)).user.length; i += 1) { %>
 						<a class="list-group-item" href="#">
 							<span class="badge">5</span>
 							<%= JSON.parse(JSON.stringify(home)).user[i].userName %> 
 						</a>
 					<% } %>
-					<a class="list-group-item"  href="#" id="expand_housemate4">
-						<span class="badge">7</span>
-						House Member
-					</a>						  
-					<a class="list-group-item"  href="#" id="expand_housemate5">
-						<span class="badge">9</span>
-						House Member
-					</a>
 				</div>
 					
 				<ul class="list-group" id="updates">
