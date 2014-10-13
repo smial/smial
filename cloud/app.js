@@ -188,11 +188,6 @@ app.get('/home/:homeId', function(req, res) {
 
     	alert(object.id + ' - ' + object.get('item_name'));
     }
-    res.render('grocery_list', {
-    	groceryNames: groceryNames,
-    	groceryCosts: groceryCosts,
-    	groceryNotes: groceryNotes,
-    	groceryIDs: groceryIDs});
   },
 
   error: function(error) {
