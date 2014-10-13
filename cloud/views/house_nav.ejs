@@ -44,7 +44,7 @@
 				</div>
 			
 				<div class="list-group" id="members">
-					<% for(var i=0; i < home.user.length; i += 1;) { %>
+					<% for(var i=0; i < JSON.parse(JSON.stringify(home)).user.length; i += 1;) { %>
 						<a class="list-group-item" href="#">
 							<span class="badge">5</span>
 							<%= JSON.parse(JSON.stringify(home)).user[i].userName %>
